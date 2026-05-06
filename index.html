@@ -7,8 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
-        /* This matches the exact purple from your image */
-        body { background-color: #D1B3FF; } 
+        /* Matches your purple image exactly */
+        body { background-color: #D1B3FF; overflow-x: hidden; } 
         .custom-purple { background-color: #D1B3FF; }
         .heart { position: fixed; color: #ffffff; font-size: 20px; z-index: -1; animation: float 3s linear infinite; }
         @keyframes float { from { transform: translateY(100vh); opacity: 1; } to { transform: translateY(-10vh); opacity: 0; } }
@@ -16,7 +16,7 @@
 </head>
 <body class="text-gray-800 font-sans">
 
-    <iframe id="audioPlayer" width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?enablejsapi=1" frameborder="0" allow="autoplay"></iframe>
+    <iframe id="audioPlayer" width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?enablejsapi=1&autoplay=0" frameborder="0" allow="autoplay"></iframe>
 
     <div class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
         <div class="animate__animated animate__fadeInDown bg-white/90 backdrop-blur-sm p-8 rounded-3xl shadow-2xl max-w-sm w-full border-b-8 border-white">
@@ -32,7 +32,7 @@
                 "You don't know you're beautiful... but everyone else does. Wishing you the best day ever!"
             </p>
 
-            <button onclick="playGift()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-full shadow-xl transition transform active:scale-90">
+            <button onclick="playGift()" id="giftButton" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-full shadow-xl transition transform active:scale-90">
                 Tap for your gift 🎁
             </button>
 
@@ -45,15 +45,19 @@
 
     <script>
         function playGift() {
-            // Show the hidden message
-            document.getElementById('message').classList.remove('hidden');
-            
-            // Play the One Direction song
             const player = document.getElementById('audioPlayer');
-            player.src += "&autoplay=1";
+            const message = document.getElementById('message');
+            const btn = document.getElementById('giftButton');
 
-            // Launch floating hearts
-            for (let i = 0; i < 20; i++) {
+            // 1. Show the hidden message
+            message.classList.remove('hidden');
+            btn.innerHTML = "Enjoy your day! ✨";
+            
+            // 2. Play the song instantly using the YouTube API
+            player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+
+            // 3. Launch floating hearts
+            for (let i = 0; i < 25; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
                     heart.innerHTML = '💜';
@@ -61,6 +65,7 @@
                     heart.style.left = Math.random() * 100 + 'vw';
                     heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
                     document.body.appendChild(heart);
+                    // Remove heart after animation to keep the site fast
                     setTimeout(() => heart.remove(), 5000);
                 }, i * 150);
             }
