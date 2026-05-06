@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Demo ❤️</title>
+    <title>Happy Birthday Rajashree! ❤️</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
-        /* Black background and falling hearts */
-        body { background-color: #080808; color: #ffffff; overflow-x: hidden; font-family: sans-serif; }
+        /* Dark, elegant theme */
+        body { background-color: #080808; color: #ffffff; overflow: hidden; font-family: sans-serif; }
         
+        /* Heart Snowflake effect */
         .snowflake { position: fixed; top: -10vh; z-index: 0; animation: fall linear infinite; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh); } }
 
-        /* The Photo Frame */
+        /* The Polaroid Frame for the Video */
         .photo-frame {
-            background: white; padding: 15px 15px 45px 15px; border-radius: 4px;
-            box-shadow: 0 15px 35px rgba(209, 179, 255, 0.3);
-            max-width: 320px; width: 100%; transition: transform 0.3s ease;
+            background: white; padding: 12px 12px 45px 12px; border-radius: 4px;
+            box-shadow: 0 15px 45px rgba(209, 179, 255, 0.4);
+            max-width: 340px; width: 100%; transition: transform 0.3s ease;
+            position: relative; z-index: 10;
         }
-        .photo-frame:hover { transform: scale(1.02); }
-        .photo-frame img { width: 100%; height: auto; border-radius: 2px; }
-        .caption { color: #333; text-align: center; font-style: italic; margin-top: 15px; font-weight: bold; }
+        .photo-frame video { width: 100%; height: auto; border-radius: 2px; }
+        .caption { color: #333; text-align: center; font-style: italic; margin-top: 15px; font-weight: bold; font-size: 1.1rem; }
+        
+        .btn-purple { background: linear-gradient(135deg, #a855f7 0%, #D1B3FF 100%); color: #000; }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-6">
@@ -29,31 +32,45 @@
     <iframe id="youtubePlayer" width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?enablejsapi=1" frameborder="0" allow="autoplay"></iframe>
 
     <div class="z-10 text-center max-w-lg">
-        <h1 class="text-4xl font-bold mb-6 animate__animated animate__fadeInDown" style="color: #D1B3FF;">
+        <h1 class="text-4xl font-bold mb-8 animate__animated animate__fadeInDown" style="color: #D1B3FF;">
             Happy Birthday Rajashree!
         </h1>
 
         <div class="photo-frame mx-auto animate__animated animate__zoomIn">
-            <img src="photo.jpg" onerror="this.src='https://via.placeholder.com/300x400/D1B3FF/333333?text=Your+Photo+Here'">
-            <p class="caption">A special memory 💜</p>
+            <video autoplay muted loop playsinline class="w-full">
+                <source src="1778037251143.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p class="caption">A moment with you 💜</p>
         </div>
 
-        <p class="mt-8 text-gray-400 italic">"What Makes You Beautiful" is playing for you...</p>
+        <p class="mt-8 text-gray-400 italic text-lg px-4 animate__animated animate__fadeIn">
+            "Watching you grow... you don't know you're beautiful, but everyone else does."
+        </p>
         
-        <button onclick="startMusic()" class="mt-6 bg-indigo-600 text-white px-8 py-3 rounded-full font-bold shadow-lg active:scale-95 transition">
-            Tap to Start Music 🎵
+        <button onclick="startCelebration()" id="mainBtn" class="mt-8 btn-purple px-10 py-4 rounded-full font-bold shadow-xl active:scale-95 transition-all text-lg">
+            Tap for your surprise 🎁
         </button>
+
+        <div id="extraMessage" class="hidden mt-8 animate__animated animate__fadeIn">
+            <p class="text-xl font-bold" style="color: #D1B3FF;">Enjoy your special day! ✨</p>
+            <div class="mt-4 text-4xl">🎂 🎉 🎈</div>
+        </div>
     </div>
 
     <script>
-        function startMusic() {
+        function startCelebration() {
+            // 1. Play the music
             const player = document.getElementById('youtubePlayer');
-            // This tells the YouTube video to start
             player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            alert("Happy Birthday! Music is now playing.");
+
+            // 2. Show the message
+            document.getElementById('extraMessage').classList.remove('hidden');
+            document.getElementById('mainBtn').innerHTML = "Enjoy the music! 🎵";
+            document.getElementById('mainBtn').style.opacity = "0.6";
         }
 
-        // Snowflake Heart Logic
+        // Heart Snowflake Logic
         function createHeart() {
             const heart = document.createElement('div');
             heart.innerHTML = Math.random() > 0.5 ? '🤍' : '💜';
@@ -64,7 +81,7 @@
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createHeart, 200); // Creates a heart every 200ms
+        setInterval(createHeart, 150);
     </script>
 </body>
 </html>
