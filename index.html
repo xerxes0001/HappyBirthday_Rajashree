@@ -9,7 +9,7 @@
     <style>
         body { background-color: #080808; color: #ffffff; overflow-x: hidden; font-family: sans-serif; margin: 0; padding-bottom: 200px; scroll-behavior: smooth; }
         
-        /* 1. Side-by-Side Horizontal Video Strip */
+        /* 1. Centered Horizontal Video Strip */
         .video-strip {
             display: flex; overflow-x: auto; gap: 15px; padding: 40px 15px;
             justify-content: flex-start; align-items: center;
@@ -20,7 +20,7 @@
 
         /* 2. Proper Polaroid Framing */
         .polaroid {
-            background: #ffffff; padding: 10px 10px 35px 10px; border-radius: 2px;
+            background: #ffffff; padding: 10px 10px 40px 10px; border-radius: 2px;
             box-shadow: 0 10px 30px rgba(209, 179, 255, 0.3); width: 280px;
             flex: 0 0 280px; scroll-snap-align: center; position: relative; z-index: 10;
         }
@@ -33,9 +33,9 @@
             display: block; object-fit: contain; background: #000; 
         }
 
-        .pol-cap { color: #333; text-align: center; font-family: 'Georgia', serif; font-style: italic; margin-top: 10px; font-size: 0.85rem; font-weight: bold; }
+        .pol-cap { color: #333; text-align: center; font-family: 'Georgia', serif; font-style: italic; margin-top: 15px; font-size: 0.95rem; font-weight: bold; }
 
-        /* Nicknames & Arrow Connectors */
+        /* Labels & Connectors */
         .nickname-label { color: #D1B3FF; font-size: 1.8rem; font-weight: bold; margin: 50px 0 10px 0; text-align: center; }
         .arrow-connector { color: #444; font-size: 40px; margin: 15px 0; text-align: center; }
 
@@ -50,7 +50,7 @@
         .heart-snow { position: fixed; font-size: 22px; z-index: 99; animation: floatUp linear infinite; pointer-events: none; }
         @keyframes floatUp { from { transform: translateY(100vh); opacity: 1; } to { transform: translateY(-10vh); opacity: 0; } }
 
-        /* Blur Reveal for Phase 3 */
+        /* Blur Reveal Phase 3 */
         .blur-reveal { filter: blur(40px); transition: filter 2.5s ease-in-out; }
         .clear-now { filter: blur(0px) !important; }
 
@@ -68,37 +68,63 @@
     <audio id="reveal-audio" src="abhi-maza-ayagga (mp3cut.net).mp3"></audio>
 
     <div id="act1" class="p-6">
-        <h1 class="text-3xl font-bold mt-8 mb-4">For Rajashree ❤️</h1>
+        <h1 class="text-3xl font-bold mt-8 mb-4">Our Story ❤️</h1>
         <div class="video-strip">
             <div class="polaroid" style="transform: rotate(-3deg);">
                 <video autoplay muted loop playsinline><source src="1778037251143.mp4" type="video/mp4"></video>
-                <p class="pol-cap">Part 1</p>
             </div>
             <div class="polaroid" style="transform: rotate(2deg);">
                 <video autoplay muted loop playsinline><source src="VID-20260124-WA0003(1).mp4" type="video/mp4"></video>
-                <p class="pol-cap">Part 2</p>
             </div>
             <div class="polaroid" style="transform: rotate(-1deg);">
                 <video autoplay muted loop playsinline><source src="doc_2026-05-06_13-28-43.mp4" type="video/mp4"></video>
-                <p class="pol-cap">Part 3</p>
             </div>
         </div>
-        <button onclick="unlockTimeline()" class="mt-8 bg-purple-600 text-white px-10 py-4 rounded-full font-bold shadow-lg animate__animated animate__pulse animate__infinite">The Evolution ↓</button>
+        <button onclick="unlockTimeline()" class="mt-8 bg-purple-600 text-white px-10 py-4 rounded-full font-bold shadow-lg animate__animated animate__pulse animate__infinite">Open the Timeline ↓</button>
     </div>
 
     <div id="act2" class="hidden p-6">
-        <div class="nickname-label">Pillu (Infant) 🍼</div>
-        <div class="polaroid timeline-polaroid" style="transform: rotate(2deg);"><img src="crybaby"></div>
+        <div class="nickname-label">Pillu 🍼</div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(2deg);"><img src="crybaby"><p class="pol-cap">Where it started</p></div>
         
         <div class="arrow-connector">↓</div>
 
-        <div class="nickname-label">Bevdi ❤️</div>
+        <div class="nickname-label">With Aaji ❤️</div>
         <div class="polaroid timeline-polaroid" style="transform: rotate(-2deg);"><img src="aaji"></div>
 
         <div class="arrow-connector">↓</div>
 
-        <div class="nickname-label">Don 😈</div>
-        <div class="polaroid timeline-polaroid" style="transform: rotate(1deg);"><img src="trek"></div>
+        <div class="nickname-label">The Haircut Days 💇‍♀️</div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(1deg);"><img src="haircut-1"></div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(-2deg);"><img src="haircut-2"></div>
+
+        <div class="arrow-connector">↓</div>
+
+        <div class="nickname-label">Traditional Vibes 🌸</div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(2deg);"><img src="traditional"></div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(-1deg);"><img src="menhdi"></div>
+
+        <div class="arrow-connector">↓</div>
+
+        <div class="nickname-label">Trek & Adventure ⛰️</div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(3deg);"><img src="trek"></div>
+
+        <div class="arrow-connector">↓</div>
+
+        <div class="nickname-label">Holi Colors 🌈</div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(-2deg);"><img src="Holi-4"></div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(1deg);"><img src="Holi grp"></div>
+
+        <div class="arrow-connector">↓</div>
+
+        <div class="nickname-label">Style Icon 🕶️</div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(-1deg);"><img src="red shirt"></div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(2deg);"><img src="kurta-1"></div>
+
+        <div class="arrow-connector">↓</div>
+
+        <div class="nickname-label">Bevdi ❤️</div>
+        <div class="polaroid timeline-polaroid" style="transform: rotate(-3deg);"><img src="wedding"></div>
 
         <button onclick="startFinalSurprise()" class="mt-16 mb-20 bg-gradient-to-r from-purple-500 to-indigo-400 text-black px-12 py-5 rounded-full font-bold shadow-2xl">Final Surprise ✨</button>
     </div>
@@ -111,14 +137,21 @@
     </div>
 
     <div id="photoViewer" onclick="this.style.display='none'">
-        <div class="polaroid" style="max-width: 95vw; width: auto;"><img id="bigImg" src="" style="max-height: 80vh;"><p class="pol-cap">Close</p></div>
+        <div class="polaroid" style="max-width: 95vw; width: auto;"><img id="bigImg" src="" style="max-height: 80vh;"><p class="pol-cap">Tap to Close</p></div>
     </div>
 
     <script>
-        const allPhotos = ['crybaby', 'don', 'aaji', 'haircut-1', 'haircut-2', 'holi-2-1', 'kurta-1', 'kurta-2', 'menhdi', 'red shirt', 'red shirt-2', 'red shirt-3', 'red shirt-4', 'traditional', 'trek', 'wedding', 'Holi grp', 'Holi-4', 'IMG-20260123-WA0038(3).jpg', 'IMG-20260123-WA0039.jpg'];
+        // Full 22+ Photo List for the Raining Snowfall
+        const allPhotos = [
+            'crybaby', 'don', 'aaji', 'haircut-1', 'haircut-2', 'holi-2-1', 
+            'kurta-1', 'kurta-2', 'menhdi', 'red shirt', 'red shirt-2', 
+            'red shirt-3', 'red shirt-4', 'traditional', 'trek', 'wedding', 
+            'Holi grp', 'Holi-4', 'IMG-20260123-WA0038(3).jpg', 'IMG-20260123-WA0039.jpg',
+            'IMG-20260123-WA0047.jpg', 'IMG-20260124-WA0007(1).jpg'
+        ];
+        
         let heartInterval;
 
-        // One Direction starts on first tap
         document.body.addEventListener('touchstart', () => {
             const container = document.getElementById('audio-storage');
             if(container.innerHTML === "") {
@@ -142,7 +175,7 @@
                 document.getElementById('bevdiFrame').classList.add('clear-now');
                 document.getElementById('statusText').innerHTML = "ABHI MAZA AAYEGA, NA BIDU! 😎🍷";
 
-                // Wait 5 seconds after reveal, then turn off hearts and start photo snow
+                // WAIT 5 SECONDS after reveal starts, then swap hearts for photos
                 setTimeout(() => { 
                     clearInterval(heartInterval); 
                     document.querySelectorAll('.heart-snow').forEach(h => h.remove());
