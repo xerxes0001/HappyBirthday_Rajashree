@@ -3,25 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajashree's Birthday Journey ❤️</title>
+    <title>For Rajashree ❤️</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
         body { background-color: #080808; color: #ffffff; overflow: hidden; font-family: sans-serif; }
-        
-        /* Heart snowflake effect */
         .snowflake { position: fixed; top: -10vh; z-index: 0; animation: fall linear infinite; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh); } }
-
-        /* Polaroid Style */
         .polaroid {
-            background: white; padding: 12px 12px 40px 12px; border-radius: 4px;
+            background: white; padding: 12px 12px 45px 12px; border-radius: 4px;
             box-shadow: 0 15px 45px rgba(209, 179, 255, 0.4);
             max-width: 320px; width: 100%; margin: auto;
         }
         .polaroid video { width: 100%; height: auto; border-radius: 2px; background: #000; }
         .caption { color: #333; text-align: center; font-style: italic; margin-top: 15px; font-weight: bold; }
-        
         .btn-purple { background: linear-gradient(135deg, #a855f7 0%, #D1B3FF 100%); color: #000; }
         .hidden-page { display: none; }
     </style>
@@ -31,67 +26,60 @@
     <iframe id="youtubePlayer" width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?enablejsapi=1" frameborder="0"></iframe>
 
     <div id="page0" class="animate__animated animate__fadeIn">
-        <h1 class="text-4xl font-bold mb-10" style="color: #D1B3FF;">Happy Birthday Rajashree!</h1>
+        <h1 class="text-3xl font-bold mb-8" style="color: #D1B3FF;">Happy Birthday Rajashree!</h1>
         <div class="polaroid mb-8">
             <video autoplay muted loop playsinline>
                 <source src="1778037251143.mp4" type="video/mp4">
             </video>
-            <p class="caption">The start of something beautiful 💜</p>
+            <p class="caption">A special day for a special soul 💜</p>
         </div>
-        <button onclick="startJourney()" class="btn-purple px-10 py-4 rounded-full font-bold shadow-xl active:scale-95 text-lg">
+        <button onclick="startJourney()" class="btn-purple px-10 py-4 rounded-full font-bold shadow-xl active:scale-95">
             Click here for a surprise 🎁
         </button>
     </div>
 
     <div id="page1" class="hidden-page animate__animated">
-        <h2 class="text-2xl font-bold mb-6 text-purple-300">Cherished Moments ✨</h2>
+        <h2 class="text-2xl font-bold mb-6 text-purple-300">Moments to Cherish...</h2>
         <div class="polaroid mb-8">
             <video id="vid1" muted loop playsinline>
                 <source src="VID-20260124-WA0003(1).mp4" type="video/mp4">
             </video>
-            <p class="caption">A special memory ❤️</p>
+            <p class="caption">Forever grateful for you ❤️</p>
         </div>
-        <button onclick="nextPage(2)" class="text-purple-300 font-bold text-lg">Next Memory →</button>
+        <button onclick="nextPage(2)" class="text-purple-300 font-bold">Next Memory →</button>
     </div>
 
     <div id="page2" class="hidden-page animate__animated">
-        <h2 class="text-2xl font-bold mb-6 text-purple-300">Forever Smiling 🌻</h2>
+        <h2 class="text-2xl font-bold mb-6 text-purple-300">Always Smiling ✨</h2>
         <div class="polaroid mb-8">
             <video id="vid2" muted loop playsinline>
                 <source src="doc_2026-05-06_13-28-43.mp4" type="video/mp4">
             </video>
-            <p class="caption">The best is yet to come 💜</p>
+            <p class="caption">To many more years of this 💜</p>
         </div>
-        <div class="text-5xl mb-6">🎂 🎉 🎈</div>
-        <button onclick="location.reload()" class="text-sm text-gray-500 underline">Start Again</button>
+        <div class="text-5xl mt-6">🎂 🎉 🎈</div>
     </div>
 
     <script>
         function startJourney() {
-            // Play Music
             const player = document.getElementById('youtubePlayer');
             player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            
             nextPage(1);
         }
 
         function nextPage(num) {
-            // Hide all pages
             document.getElementById('page0').style.display = 'none';
             document.getElementById('page1').style.display = 'none';
             document.getElementById('page2').style.display = 'none';
 
-            // Show requested page
             const next = document.getElementById('page' + num);
             next.style.display = 'block';
             next.classList.add('animate__fadeInRight');
 
-            // Play the video on that page
             if(num === 1) document.getElementById('vid1').play();
             if(num === 2) document.getElementById('vid2').play();
         }
 
-        // Heart Snowflakes
         function createHeart() {
             const heart = document.createElement('div');
             heart.innerHTML = Math.random() > 0.5 ? '🤍' : '💜';
@@ -102,7 +90,7 @@
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createHeart, 200);
+        setInterval(createHeart, 250);
     </script>
 </body>
 </html>
