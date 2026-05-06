@@ -9,48 +9,56 @@
     <style>
         body { background-color: #080808; color: #ffffff; overflow-x: hidden; font-family: sans-serif; margin: 0; }
         
-        /* Act 1: Horizontal Scattered Videos */
         .video-strip {
             display: flex;
             overflow-x: auto;
-            gap: 20px;
-            padding: 40px 20px;
+            gap: 15px;
+            padding: 30px 10px;
+            justify-content: flex-start;
+            align-items: center;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
         }
 
+        @media (min-width: 600px) { .video-strip { justify-content: center; } }
+
         .polaroid {
             background: #ffffff; padding: 8px 8px 35px 8px; border-radius: 2px;
-            box-shadow: 0 10px 25px rgba(209, 179, 255, 0.3);
-            flex: 0 0 280px; /* Width of each polaroid */
+            box-shadow: 0 10px 30px rgba(209, 179, 255, 0.3);
+            flex: 0 0 280px; 
             scroll-snap-align: center;
             position: relative;
+            z-index: 5;
         }
 
         .polaroid video, .polaroid img { 
             width: 100%; height: auto; display: block; 
             object-fit: contain; background: #000; 
+            max-height: 400px;
         }
 
         .pol-cap { color: #333; text-align: center; font-family: 'Georgia', serif; font-style: italic; margin-top: 10px; font-size: 0.8rem; font-weight: bold; }
+        .nickname-box { color: #D1B3FF; font-size: 1.8rem; font-weight: bold; margin-top: 40px; }
 
-        /* Nickname Styling */
-        .nickname-box { color: #D1B3FF; font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; }
-
-        /* Falling Snow */
+        /* Falling Snow/Photo Style */
         .falling-photo {
-            position: fixed; top: -20vh; z-index: 100; animation: fallDown linear forwards;
-            width: 100px; padding: 5px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            position: fixed; top: -25vh; z-index: 100; animation: fallDown linear forwards;
+            width: 110px; padding: 5px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            cursor: pointer; /* Makes it clear they can be clicked */
         }
         @keyframes fallDown { to { transform: translateY(125vh) rotate(360deg); } }
 
-        /* Reveal Phase 3 Blur */
+        /* Photo Viewer Overlay */
+        #photoViewer {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center;
+        }
+
+        /* Blur Reveal for Phase 3 */
         .blur-reveal { filter: blur(40px); transition: filter 2.5s ease-in-out; }
         .clear-now { filter: blur(0px) !important; }
 
         #audio-storage { position: absolute; width: 0; height: 0; overflow: hidden; }
-        
-        /* Hide scrollbar for clean look */
         .video-strip::-webkit-scrollbar { display: none; }
     </style>
 </head>
@@ -59,38 +67,40 @@
     <div id="audio-storage"></div>
     <audio id="reveal-audio" src="abhi-maza-ayagga.mp3"></audio>
 
-    <div id="act1" class="min-h-screen flex flex-col justify-center p-4">
-        <div class="nickname-box animate__animated animate__fadeIn">Bevdi, Don, Pillu... ❤️</div>
+    <div id="act1" class="min-h-screen flex flex-col justify-center">
+        <div class="nickname-box animate__animated animate__fadeInDown">Bevdi, Don, Pillu... ❤️</div>
         
         <div class="video-strip">
             <div class="polaroid" style="transform: rotate(-3deg);">
                 <video id="v1" autoplay muted loop playsinline><source src="1778037251143.mp4" type="video/mp4"></video>
-                <p class="pol-cap">Our Roots 💜</p>
+                <p class="pol-cap">Where it began 💜</p>
             </div>
             <div class="polaroid" style="transform: rotate(2deg);">
                 <video autoplay muted loop playsinline><source src="VID-20260124-WA0003(1).mp4" type="video/mp4"></video>
-                <p class="pol-cap">Moments 💜</p>
+                <p class="pol-cap">Memories 💜</p>
             </div>
             <div class="polaroid" style="transform: rotate(-1deg);">
                 <video autoplay muted loop playsinline><source src="doc_2026-05-06_13-28-43.mp4" type="video/mp4"></video>
-                <p class="pol-cap">Forever 💜</p>
+                <p class="pol-cap">Always 💜</p>
             </div>
         </div>
 
-        <button onclick="unlockAct2()" class="mt-8 mx-auto bg-purple-600 text-white px-8 py-3 rounded-full font-bold shadow-lg active:scale-95">
-            Continue Story ↓
+        <button onclick="unlockAct2()" class="mt-8 mx-auto bg-purple-600 text-white px-10 py-4 rounded-full font-bold shadow-2xl active:scale-95">
+            Start the Evolution ↓
         </button>
     </div>
 
-    <div id="act2" class="hidden p-6 bg-neutral-900/50">
-        <h2 class="text-2xl font-bold mb-10 text-purple-300">The Evolution... ✨</h2>
+    <div id="act2" class="hidden p-6 bg-neutral-900/30">
+        <h2 class="text-2xl font-bold mb-10 text-purple-300">Growing Up... ✨</h2>
         
-        <div class="polaroid" style="transform: rotate(2deg);"><img src="crybaby"><p class="pol-cap">Bevdi Don Pillu (The Start) 🍼</p></div>
+        <div class="polaroid" style="transform: rotate(2deg);"><img src="crybaby"><p class="pol-cap">The Original Pillu 🍼</p></div>
         <div class="polaroid" style="transform: rotate(-2deg);"><img src="aaji"><p class="pol-cap">With Aaji ❤️</p></div>
         <div class="polaroid" style="transform: rotate(1deg);"><img src="haircut-1"><p class="pol-cap">Pillu's Haircut 💇‍♀️</p></div>
-        <div class="polaroid" style="transform: rotate(-3deg);"><img src="trek"><p class="pol-cap">Trek Vibes ⛰️</p></div>
+        <div class="polaroid" style="transform: rotate(-3deg);"><img src="traditional"><p class="pol-cap">Grace 🌸</p></div>
+        <div class="polaroid" style="transform: rotate(2deg);"><img src="trek"><p class="pol-cap">Trek Vibes ⛰️</p></div>
+        <div class="polaroid" style="transform: rotate(-1deg);"><img src="Holi-4"><p class="pol-cap">Holi Colors 🌈</p></div>
 
-        <button onclick="unlockAct3()" class="mt-16 mb-20 bg-white text-black px-10 py-4 rounded-full font-bold shadow-xl">
+        <button onclick="unlockAct3()" class="mt-20 mb-40 bg-white text-black px-12 py-5 rounded-full font-bold shadow-2xl">
             The Final Surprise 😈
         </button>
     </div>
@@ -102,26 +112,37 @@
         </div>
     </div>
 
-    <script>
-        const photos = ['crybaby', 'don', 'aaji', 'haircut-1', 'haircut-2', 'holi-2-1', 'kurta-1', 'kurta-2', 'menhdi', 'red shirt', 'red shirt-2', 'traditional', 'trek', 'wedding', 'Holi grp', 'Holi-4'];
+    <div id="photoViewer" onclick="this.style.display='none'">
+        <div class="polaroid" style="max-width: 90vw; width: auto; transform: rotate(0deg);">
+            <img id="bigImg" src="">
+            <p class="pol-cap">Tap anywhere to close</p>
+        </div>
+    </div>
 
-        // Start 1D Music on first tap
+    <script>
+        const photoList = ['crybaby', 'don', 'aaji', 'haircut-1', 'haircut-2', 'holi-2-1', 'kurta-1', 'kurta-2', 'menhdi', 'red shirt', 'red shirt-2', 'red shirt-3', 'red shirt-4', 'traditional', 'trek', 'wedding', 'Holi grp', 'Holi-4', 'IMG-20260123-WA0038(3).jpg', 'IMG-20260123-WA0039.jpg', 'IMG-20260123-WA0047.jpg', 'IMG-20260124-WA0007(1).jpg'];
+        
+        let snowInterval;
+
         document.body.addEventListener('touchstart', () => {
             const container = document.getElementById('audio-storage');
             if(container.innerHTML === "") {
                 container.innerHTML = '<iframe width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?autoplay=1" frameborder="0" allow="autoplay"></iframe>';
+                startSnow();
             }
         }, { once: true });
 
+        function startSnow() {
+            snowInterval = setInterval(() => {
+                const img = photoList[Math.floor(Math.random() * photoList.length)];
+                dropPhoto(img);
+            }, 750);
+        }
+
         function unlockAct2() {
+            clearInterval(snowInterval); // Stop snow in Act 2
             document.getElementById('act2').classList.remove('hidden');
             document.getElementById('act2').scrollIntoView({ behavior: 'smooth' });
-            
-            // Start Photo Snow
-            setInterval(() => {
-                const img = photos[Math.floor(Math.random() * photos.length)];
-                dropPhoto(img);
-            }, 800);
         }
 
         function unlockAct3() {
@@ -129,7 +150,7 @@
             document.getElementById('act3').scrollIntoView({ behavior: 'smooth' });
 
             setTimeout(() => {
-                document.getElementById('audio-storage').innerHTML = ""; // Stop 1D
+                document.getElementById('audio-storage').innerHTML = ""; 
                 document.getElementById('bevdiFrame').classList.add('clear-now');
                 document.getElementById('statusText').innerHTML = "ABHI MAZA AAYEGA! 😈🔥";
                 document.getElementById('reveal-audio').play();
@@ -139,8 +160,16 @@
         function dropPhoto(src) {
             const el = document.createElement('div');
             el.className = 'falling-photo polaroid';
-            el.style.left = Math.random() * 80 + 'vw';
+            el.style.left = Math.random() * 85 + 'vw';
             el.style.animationDuration = (Math.random() * 2 + 4) + 's';
+            
+            // Add click functionality to the falling photo
+            el.onclick = (e) => {
+                e.stopPropagation();
+                document.getElementById('bigImg').src = src;
+                document.getElementById('photoViewer').style.display = 'flex';
+            };
+
             el.innerHTML = `<img src="${src}"><p class="pol-cap" style="font-size:0.5rem">Pillu 💜</p>`;
             document.body.appendChild(el);
             setTimeout(() => el.remove(), 7000);
