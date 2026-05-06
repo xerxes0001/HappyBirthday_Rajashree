@@ -7,118 +7,126 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
-        body, html { margin: 0; padding: 0; background: #080808; overflow: hidden; scroll-behavior: smooth; font-family: sans-serif; }
-        .section { height: 100vh; width: 100vw; position: relative; display: flex; align-items: center; justify-content: center; }
-        video, .reveal-img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+        body { background-color: #080808; color: #ffffff; overflow-x: hidden; font-family: sans-serif; margin: 0; padding-bottom: 100px; }
         
-        /* Polaroid Rain Effect */
+        /* Polaroid Styling: Keeps media from becoming a background */
         .polaroid {
-            background: #ffffff; padding: 5px 5px 20px 5px; border-radius: 2px;
-            box-shadow: 0 5px 20px rgba(209, 179, 255, 0.4); width: 130px;
+            background: #ffffff;
+            padding: 10px 10px 40px 10px;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(209, 179, 255, 0.3);
+            width: 90%;
+            max-width: 320px;
+            margin: 40px auto;
+            position: relative;
+            z-index: 10;
         }
-        .polaroid img { width: 100%; height: auto; display: block; border: 1px solid #eee; object-fit: contain; }
-        .pol-cap { color: #333; text-align: center; font-size: 0.7rem; font-weight: bold; margin-top: 5px; font-family: 'Georgia', serif; }
 
-        .falling-photo {
-            position: fixed; top: -25vh; z-index: 100;
-            animation: fallDown linear forwards;
+        .polaroid video, .polaroid img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            object-fit: contain; 
+            background: #000;
         }
-        @keyframes fallDown { to { transform: translateY(125vh) rotate(360deg); } }
 
-        /* Blur Reveal Logic */
+        .pol-cap { color: #333; text-align: center; font-family: 'Georgia', serif; font-style: italic; margin-top: 15px; font-size: 0.9rem; font-weight: bold; }
+
+        /* Blur Reveal for Phase 3 */
         .blur-reveal { filter: blur(35px); transition: filter 2.5s ease-in-out; }
         .clear-now { filter: blur(0px) !important; }
 
-        .caption { 
-            position: relative; z-index: 10; color: #D1B3FF; font-size: 2.2rem; 
-            font-weight: bold; text-align: center; text-shadow: 0 0 20px rgba(0,0,0,1);
+        /* Falling Snow Style */
+        .falling-photo {
+            position: fixed; top: -25vh; z-index: 100; pointer-events: none;
+            animation: fallDown linear forwards;
+            width: 120px; padding: 5px 5px 20px 5px; background: #fff;
         }
+        @keyframes fallDown { to { transform: translateY(125vh) rotate(360deg); } }
+
+        #audio-container { position: absolute; width: 0; height: 0; overflow: hidden; }
     </style>
 </head>
-<body>
+<body class="text-center">
 
-    <div id="1d-music"></div>
+    <div id="audio-container"></div>
     <audio id="reveal-audio" src="abhi-maza-ayagga.mp3"></audio>
 
-    <section id="p1" class="section">
-        <video id="v1" autoplay muted playsinline>
-            <source src="1778037251143.mp4" type="video/mp4">
-        </video>
-        <div class="caption animate__animated animate__fadeInDown">Bevdi, Don, Pillu... ❤️</div>
-    </section>
+    <div id="timeline" class="p-6 animate__animated animate__fadeIn">
+        <h1 class="text-3xl font-bold mb-10 mt-6" style="color: #D1B3FF;">Our Story ❤️</h1>
 
-    <section id="p2" class="section">
-        <video id="v2" muted playsinline>
-            <source src="VID-20260124-WA0003(1).mp4" type="video/mp4">
-        </video>
-        <div class="caption">Raining Memories for You 💜</div>
-    </section>
+        <div class="polaroid" style="transform: rotate(-2deg);">
+            <video id="v1" controls playsinline>
+                <source src="1778037251143.mp4" type="video/mp4">
+            </video>
+            <p class="pol-cap">Bevdi, Don, Pillu... ❤️</p>
+        </div>
 
-    <section id="p3" class="section">
-        <img id="revealImg" src="bevdi" class="reveal-img blur-reveal">
-        <div class="caption" id="finalCap">Wait for it...</div>
-    </section>
+        <div class="polaroid" style="transform: rotate(3deg);">
+            <video id="v2" controls playsinline>
+                <source src="VID-20260124-WA0003(1).mp4" type="video/mp4">
+            </video>
+            <p class="pol-cap">Moments with You 💜</p>
+        </div>
+
+        <div class="mt-12 mb-20">
+            <button onclick="startFinalPhase()" id="revealBtn" class="bg-gradient-to-r from-purple-500 to-indigo-400 text-black px-10 py-4 rounded-full font-bold shadow-2xl active:scale-95 text-lg">
+                Tap for the Surprise ☁️ ✨
+            </button>
+        </div>
+    </div>
+
+    <div id="phase3" class="hidden min-h-screen flex flex-col items-center justify-center">
+        <div class="polaroid blur-reveal" id="bevdiFrame">
+            <img src="bevdi" id="bevdiImg">
+            <p class="pol-cap" id="revealText">Wait for it...</p>
+        </div>
+    </div>
 
     <script>
-        // Full Photo List from your GitHub
-        const photos = [
-            'crybaby', 'don', 'aaji', 'haircut-1', 'haircut-2', 'holi-2-1', 
-            'kurta-1', 'kurta-2', 'menhdi', 'red shirt', 'red shirt-2', 
-            'traditional', 'trek', 'wedding', 'Holi grp', 'Holi-4'
-        ];
+        const photos = ['crybaby', 'don', 'aaji', 'haircut-1', 'haircut-2', 'holi-2-1', 'kurta-1', 'kurta-2', 'menhdi', 'red shirt', 'red shirt-2', 'traditional', 'trek', 'wedding', 'Holi grp', 'Holi-4'];
 
-        const v1 = document.getElementById('v1');
-        const v2 = document.getElementById('v2');
-        const revealAudio = document.getElementById('reveal-audio');
+        // Start 1D Music when she starts the first video
+        document.getElementById('v1').onplay = () => {
+            const container = document.getElementById('audio-container');
+            if(container.innerHTML === "") {
+                container.innerHTML = '<iframe width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?autoplay=1" frameborder="0" allow="autoplay"></iframe>';
+            }
+        };
 
-        function playOneDirection() {
-            const container = document.getElementById('1d-music');
-            container.innerHTML = '<iframe width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?autoplay=1" frameborder="0" allow="autoplay"></iframe>';
-        }
-
-        // Standard touch-to-start for mobile
-        document.body.addEventListener('touchstart', () => {
-            v1.play();
-            playOneDirection();
-        }, { once: true });
-
-        // Phase 1 -> Phase 2
-        v1.onended = () => {
-            document.getElementById('p2').scrollIntoView({ behavior: 'smooth' });
-            setTimeout(() => { v2.play(); }, 500);
-
-            // Start Photo Snow
+        function startFinalPhase() {
+            // 1. Start the "Snowing" photos
             setInterval(() => {
                 const imgName = photos[Math.floor(Math.random() * photos.length)];
                 createFallingPhoto(imgName);
-            }, 900);
-        };
+            }, 800);
 
-        // Phase 2 -> Phase 3 Reveal
-        v2.onended = () => {
-            document.getElementById('p3').scrollIntoView({ behavior: 'smooth' });
-            
-            // Countdown for the "Abhi Maza Ayagga" reveal
+            // 2. Show Phase 3
+            document.getElementById('phase3').classList.remove('hidden');
+            document.getElementById('phase3').scrollIntoView({ behavior: 'smooth' });
+
+            // 3. Countdown for Blur Reveal and Abhi Maza Aayega
             setTimeout(() => {
-                // Clear the Blur
-                document.getElementById('revealImg').classList.add('clear-now');
-                document.getElementById('finalCap').innerHTML = "ABHI MAZA AAYEGA! 😈🔥";
+                // Clear the 1D music
+                document.getElementById('audio-container').innerHTML = "";
                 
-                // Stop 1D and play Abhi Maza Ayagga
-                document.getElementById('1d-music').innerHTML = ""; // Stop One Direction
-                revealAudio.play();
-            }, 3000); // 3 seconds delay for the drop
-        };
+                // Clear Blur
+                document.getElementById('bevdiFrame').classList.add('clear-now');
+                document.getElementById('revealText').innerHTML = "ABHI MAZA AAYEGA! 😈🔥";
+                
+                // Play final audio
+                document.getElementById('reveal-audio').play();
+            }, 3500); 
+        }
 
         function createFallingPhoto(src) {
             const container = document.createElement('div');
-            container.className = 'falling-photo polaroid';
+            container.className = 'falling-photo';
             container.style.left = Math.random() * 80 + 'vw';
             container.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            // Note: src doesn't have .jpg extension based on your rename list
-            container.innerHTML = `<img src="${src}"><p class="pol-cap">Pillu 💜</p>`;
+            container.innerHTML = `<img src="${src}" style="width:100%"><p class="pol-cap" style="font-size:0.5rem">Pillu 💜</p>`;
             document.body.appendChild(container);
-            setTimeout(() => container.remove(), 7500);
+            setTimeout(() => container.remove(), 7000);
         }
     </script>
 </body>
