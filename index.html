@@ -7,79 +7,93 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
-        body { background-color: #080808; color: #ffffff; overflow: hidden; font-family: sans-serif; }
+        body { background-color: #080808; color: #ffffff; overflow-x: hidden; font-family: sans-serif; margin: 0; }
         .snowflake { position: fixed; top: -10vh; z-index: 0; animation: fall linear infinite; pointer-events: none; }
         @keyframes fall { to { transform: translateY(110vh); } }
         .polaroid {
             background: white; padding: 12px 12px 45px 12px; border-radius: 4px;
             box-shadow: 0 15px 45px rgba(209, 179, 255, 0.4);
-            max-width: 320px; width: 100%; margin: auto;
+            max-width: 320px; width: 100%; margin: 20px auto;
         }
-        .polaroid video { width: 100%; height: auto; border-radius: 2px; background: #000; }
-        .caption { color: #333; text-align: center; font-style: italic; margin-top: 15px; font-weight: bold; }
-        .btn-purple { background: linear-gradient(135deg, #a855f7 0%, #D1B3FF 100%); color: #000; }
+        .polaroid video { width: 100%; height: auto; border-radius: 2px; background: #000; display: block; }
+        .caption { color: #333; text-align: center; font-style: italic; margin-top: 15px; font-weight: bold; font-size: 0.9rem; }
+        .btn-purple { background: linear-gradient(135deg, #a855f7 0%, #D1B3FF 100%); color: #000; transition: transform 0.2s; }
         .hidden-page { display: none; }
+        #music-container { position: absolute; width: 0; height: 0; overflow: hidden; }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-6 text-center">
 
-    <iframe id="youtubePlayer" width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?enablejsapi=1" frameborder="0"></iframe>
+    <div id="music-container"></div>
 
-    <div id="page0" class="animate__animated animate__fadeIn">
-        <h1 class="text-3xl font-bold mb-8" style="color: #D1B3FF;">Happy Birthday Rajashree!</h1>
-        <div class="polaroid mb-8">
-            <video autoplay muted loop playsinline>
+    <div id="page0" class="page-container animate__animated animate__fadeIn">
+        <h1 class="text-3xl font-bold mb-6" style="color: #D1B3FF;">Happy Birthday Rajashree!</h1>
+        <div class="polaroid">
+            <video id="vid0" autoplay muted loop playsinline>
                 <source src="1778037251143.mp4" type="video/mp4">
             </video>
             <p class="caption">A special day for a special soul 💜</p>
         </div>
-        <button onclick="startJourney()" class="btn-purple px-10 py-4 rounded-full font-bold shadow-xl active:scale-95">
+        <button onclick="startJourney()" class="btn-purple px-10 py-4 rounded-full font-bold shadow-xl active:scale-95 mt-6">
             Click here for a surprise 🎁
         </button>
     </div>
 
-    <div id="page1" class="hidden-page animate__animated">
-        <h2 class="text-2xl font-bold mb-6 text-purple-300">Moments to Cherish...</h2>
-        <div class="polaroid mb-8">
-            <video id="vid1" muted loop playsinline>
+    <div id="page1" class="hidden-page page-container animate__animated">
+        <h2 class="text-2xl font-bold mb-4 text-purple-300">Moments to Cherish...</h2>
+        <div class="polaroid">
+            <video id="vid1" loop playsinline muted>
                 <source src="VID-20260124-WA0003(1).mp4" type="video/mp4">
             </video>
             <p class="caption">Forever grateful for you ❤️</p>
         </div>
-        <button onclick="nextPage(2)" class="text-purple-300 font-bold">Next Memory →</button>
+        <button onclick="showPage(2)" class="text-purple-300 font-bold mt-4 underline">Next Memory →</button>
     </div>
 
-    <div id="page2" class="hidden-page animate__animated">
-        <h2 class="text-2xl font-bold mb-6 text-purple-300">Always Smiling ✨</h2>
-        <div class="polaroid mb-8">
-            <video id="vid2" muted loop playsinline>
+    <div id="page2" class="hidden-page page-container animate__animated">
+        <h2 class="text-2xl font-bold mb-4 text-purple-300">Always Smiling ✨</h2>
+        <div class="polaroid">
+            <video id="vid2" loop playsinline muted>
                 <source src="doc_2026-05-06_13-28-43.mp4" type="video/mp4">
             </video>
             <p class="caption">To many more years of this 💜</p>
         </div>
+        <p class="text-purple-200 italic mt-4">Happy Birthday, Rajashree!</p>
         <div class="text-5xl mt-6">🎂 🎉 🎈</div>
     </div>
 
     <script>
+        // Start Journey: Handles Music and Page Swap
         function startJourney() {
-            const player = document.getElementById('youtubePlayer');
-            player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            nextPage(1);
+            // 1. Inject YouTube Music (Plays "What Makes You Beautiful")
+            const music = document.getElementById('music-container');
+            music.innerHTML = '<iframe width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?autoplay=1" frameborder="0" allow="autoplay"></iframe>';
+            
+            // 2. Go to Page 1
+            showPage(1);
         }
 
-        function nextPage(num) {
-            document.getElementById('page0').style.display = 'none';
-            document.getElementById('page1').style.display = 'none';
-            document.getElementById('page2').style.display = 'none';
+        function showPage(num) {
+            // Hide all pages
+            document.querySelectorAll('.page-container').forEach(p => p.style.display = 'none');
+            
+            // Show the selected page
+            const nextPage = document.getElementById('page' + num);
+            nextPage.style.display = 'block';
+            nextPage.classList.add('animate__fadeInRight');
 
-            const next = document.getElementById('page' + num);
-            next.style.display = 'block';
-            next.classList.add('animate__fadeInRight');
-
-            if(num === 1) document.getElementById('vid1').play();
-            if(num === 2) document.getElementById('vid2').play();
+            // Play the corresponding video
+            if(num === 1) {
+                const v1 = document.getElementById('vid1');
+                v1.play().catch(e => console.log("Auto-play blocked"));
+            }
+            if(num === 2) {
+                const v2 = document.getElementById('vid2');
+                v2.play().catch(e => console.log("Auto-play blocked"));
+            }
         }
 
+        // Floating Hearts/Snowflakes effect
         function createHeart() {
             const heart = document.createElement('div');
             heart.innerHTML = Math.random() > 0.5 ? '🤍' : '💜';
@@ -90,7 +104,7 @@
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createHeart, 250);
+        setInterval(createHeart, 300);
     </script>
 </body>
 </html>
