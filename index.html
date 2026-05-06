@@ -9,7 +9,7 @@
     <style>
         body { background-color: #080808; color: #ffffff; overflow-x: hidden; font-family: sans-serif; margin: 0; padding-bottom: 100px; }
         
-        /* Proper White Polaroid Style */
+        /* Fixed Polaroid: No Cropping */
         .polaroid {
             background: #ffffff;
             padding: 10px 10px 40px 10px;
@@ -20,18 +20,29 @@
             margin: 25px auto;
             display: inline-block;
         }
-        .polaroid video, .polaroid img { width: 100%; height: auto; display: block; border: 1px solid #eee; }
+
+        /* The Fix: Ensures the full image is shown regardless of its shape */
+        .polaroid video, .polaroid img { 
+            width: 100%; 
+            height: auto; 
+            max-height: 400px; /* Prevents extremely long photos from breaking the layout */
+            display: block; 
+            border: 1px solid #eee;
+            object-fit: contain; 
+            background: #fdfdfd;
+        }
+
         .caption { color: #333; text-align: center; font-family: 'Georgia', serif; font-style: italic; margin-top: 10px; font-size: 0.8rem; font-weight: bold; }
 
         /* Falling Photo Style */
         .falling-photo {
             position: fixed;
             top: -25vh;
-            width: 140px;
+            width: 130px;
             z-index: 100;
             cursor: pointer;
             animation: fallDown linear forwards;
-            padding: 6px 6px 25px 6px; /* Smaller polaroid for rain */
+            padding: 6px 6px 20px 6px;
         }
         @keyframes fallDown {
             to { transform: translateY(125vh) rotate(360deg); }
@@ -40,7 +51,7 @@
         /* Full Screen Photo Viewer */
         #photoViewer {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.98); z-index: 1000; align-items: center; justify-content: center;
         }
         
         #music-container { position: absolute; width: 0; height: 0; overflow: hidden; }
@@ -77,14 +88,13 @@
     </div>
 
     <div id="photoViewer" onclick="this.style.display='none'">
-        <div class="polaroid" style="max-width: 85vw; transform: rotate(0deg);">
-            <img id="viewImg" src="">
+        <div class="polaroid" style="max-width: 90vw; width: auto; transform: rotate(0deg); padding-bottom: 50px;">
+            <img id="viewImg" src="" style="max-height: 70vh; width: auto; margin: auto;">
             <p class="caption">Tap anywhere to close</p>
         </div>
     </div>
 
     <script>
-        // All your uploaded photo filenames
         const photos = [
             'IMG-20260123-WA0037.jpg', 'IMG-20260123-WA0038(3).jpg', 
             'IMG-20260123-WA0039.jpg', 'IMG-20260123-WA0047.jpg', 
@@ -96,15 +106,13 @@
         ];
 
         function startRain() {
-            // Start Music
             const music = document.getElementById('music-container');
             music.innerHTML = '<iframe width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?autoplay=1" frameborder="0" allow="autoplay"></iframe>';
 
-            // Start creating falling photos every 700ms
             setInterval(() => {
                 const randomImg = photos[Math.floor(Math.random() * photos.length)];
                 createFallingPhoto(randomImg);
-            }, 700);
+            }, 800);
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -112,9 +120,7 @@
         function createFallingPhoto(src) {
             const container = document.createElement('div');
             container.className = 'falling-photo polaroid';
-            
-            // Random horizontal position and speed
-            container.style.left = Math.random() * 85 + 'vw';
+            container.style.left = Math.random() * 80 + 'vw';
             container.style.animationDuration = (Math.random() * 3 + 4) + 's';
             
             container.onclick = (e) => {
@@ -125,8 +131,6 @@
 
             container.innerHTML = `<img src="${src}"><p class="caption">View 💜</p>`;
             document.body.appendChild(container);
-
-            // Cleanup
             setTimeout(() => container.remove(), 8000);
         }
     </script>
