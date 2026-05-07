@@ -9,19 +9,14 @@
     <style>
         body { background-color: #080808; color: #ffffff; overflow-x: hidden; font-family: sans-serif; margin: 0; padding-bottom: 250px; scroll-behavior: smooth; }
         
-        /* 1. PASSWORD & TIMER OVERLAY */
         #lockOverlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #080808; z-index: 3000; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center; padding: 20px;
         }
-        .lock-input { 
-            background: #1a1a1a; border: 2px solid #D1B3FF; color: white; 
-            padding: 15px; border-radius: 10px; text-align: center; font-size: 1.2rem; margin-bottom: 20px;
-        }
+        .lock-input { background: #1a1a1a; border: 2px solid #D1B3FF; color: white; padding: 15px; border-radius: 10px; text-align: center; font-size: 1.2rem; margin-bottom: 20px; outline: none; }
         .timer-box { font-family: monospace; font-size: 2.5rem; color: #ff4d4d; margin-top: 30px; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255, 77, 77, 0.5); }
 
-        /* 2. VINTAGE LETTER OVERLAY */
         #startOverlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, #e2c08d 0%, #c19a6b 100%);
@@ -34,7 +29,6 @@
         .word { opacity: 0; display: inline-block; margin-right: 5px; transition: opacity 0.4s ease; }
         .word.visible { opacity: 1; }
 
-        /* General Layouts */
         .polaroid { background: #ffffff; padding: 10px; border-radius: 2px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 280px; flex: 0 0 280px; margin: 30px auto; position: relative; z-index: 10;}
         .timeline-polaroid { width: 90%; max-width: 320px; margin: 30px auto; flex: none; }
         .polaroid video, .polaroid img { width: 100%; height: auto; max-height: 400px; display: block; object-fit: contain; background: #000; }
@@ -58,9 +52,9 @@
 
     <div id="lockOverlay">
         <h2 class="text-2xl mb-6 text-purple-300">Enter the Secret Code 🔐</h2>
-        <input type="text" id="passInput" class="lock-input" placeholder="Password?">
+        <input type="text" id="passInput" class="lock-input" placeholder="Password">
         <button onclick="checkPass()" class="bg-purple-600 text-white px-8 py-3 rounded-full font-bold active:scale-95">Unlock Surprise</button>
-        <p id="errorMsg" class="mt-4 text-red-500 hidden">Hint: It's the name you practiced for a month! 😉</p>
+        <p id="errorMsg" class="mt-4 text-red-500 hidden">Try again! ❤️</p>
         
         <div class="timer-box" id="timer">00:00:00</div>
         <p id="countdownMsg" class="text-gray-500 mt-2">Counting down to the big moment...</p>
@@ -128,51 +122,45 @@
     <div id="photoViewer" onclick="this.style.display='none'"><div class="polaroid" style="max-width: 95vw; width: auto;"><img id="bigImg" src="" style="max-height: 80vh;"><p class="pol-cap">Tap to Close</p></div></div>
 
     <script>
-        const message = "I first saw you during our 10th grade, and since then, I have had a crush on you. We had our verbal abuse competitions several times, and the second time, you were the clear winner. I was quite dumb, even when you tried to contact me through Telegram. I should have understood the obvious signs and the subtle hints you dropped like keeping good profile pictures, which I did save, just in case I ever found the courage to propose. But I never did. You know, destiny works in beautiful ways. You were the one who proposed to me; you were the one who caught the hint I dropped: 'You are blunt... Tu tondavar bolte sagla.' Then you practiced for a month just to propose to me on the very first day of the year 01/01/2026. This was the best New Year present for me—starting the year with the very person I love. I know I messed up quite a lot, but you understood my dumb behavior and forgave me so many times. I have hurt you, but it was never intentional, and it never will be. All I ever want is for you to be happy. Happy Birthday, BonBon / Pillu (Rajashree). I love you so much, my darling.";
+        const message = "I first saw you during our 10th grade, and since then, I have had a crush on you. We had our verbal abuse competitions several times, and the second time, you were the clear winner. I was quite dumb, even when you tried to contact me through Telegram. I should have understood the obvious signs and the subtle hints you dropped—like keeping good profile pictures, which I did save, just in case I ever found the courage to propose. But I never did. You know, destiny works in beautiful ways. You were the one who proposed to me; you were the one who caught the hint I dropped: 'You are blunt... Tu tondavar bolte sagla.' Then you practiced for a month just to propose to me on the very first day of the year—01/01/2026. This was the best New Year present for me—starting the year with the very person I love. I know I messed up quite a lot, but you understood my dumb behavior and forgave me so many times. I have hurt you, but it was never intentional, and it never will be. All I ever want is for you to be happy. Happy Birthday, BonBon / Pillu (Rajashree). I love you so much, my darling.";
         
         const allPhotos = ['crybaby', 'don', 'aaji', 'haircut-1', 'haircut-2', 'holi-2-1', 'kurta-1', 'kurta-2', 'menhdi', 'red shirt', 'red shirt-2', 'red shirt-3', 'red shirt-4', 'traditional', 'trek', 'wedding', 'Holi grp', 'Holi-4', 'IMG-20260123-WA0038(3).jpg', 'IMG-20260123-WA0039.jpg', 'IMG-20260123-WA0047.jpg', 'IMG-20260124-WA0007(1).jpg'];
         
         let heartInterval;
-        let isBirthdayTime = false;
+        
+        // TESTER MODE: Always 'true'. Set to 'false' for the real May 9th launch.
+        let isBirthdayTime = true; 
 
-        // TARGET DATE: May 9th, 2026
         const targetDate = new Date("May 9, 2026 00:00:00").getTime();
-
         const timerLoop = setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
-
             if (diff <= 0) {
                 clearInterval(timerLoop);
                 isBirthdayTime = true;
                 document.getElementById('timer').innerText = "00:00:00";
                 document.getElementById('timer').style.color = "#00ff00";
-                document.getElementById('countdownMsg').innerText = "Happy Birthday BonBon / Pillu / Rajashree! ❤️";
+                document.getElementById('countdownMsg').innerText = "Happy Birthday Rajashree! ❤️";
                 return;
             }
-
             const hrs = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('timer').innerText = 
-                `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            document.getElementById('timer').innerText = `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }, 1000);
 
         function checkPass() {
-            const val = document.getElementById('passInput').value;
-            if(val === "BonBon") {
+            if(document.getElementById('passInput').value === "BonBon") {
                 document.getElementById('lockOverlay').style.display = 'none';
                 document.getElementById('startOverlay').style.display = 'flex';
                 if(isBirthdayTime) document.getElementById('bdayHeader').innerText = "Happy Birthday Rajashree 🎂✨";
                 startTypewriter();
-            } else {
-                document.getElementById('errorMsg').classList.remove('hidden');
-            }
+            } else { document.getElementById('errorMsg').classList.remove('hidden'); }
         }
 
         function startTypewriter() {
             const container = document.getElementById('typewriterText');
+            container.innerHTML = "";
             const words = message.split(" ");
             words.forEach((word, index) => {
                 const span = document.createElement('span');
@@ -183,7 +171,7 @@
                     if (index === words.length - 1 && isBirthdayTime) {
                         document.getElementById('giftBtn').classList.remove('hidden');
                     }
-                }, index * 220);
+                }, index * 100); // 100ms per word speed
             });
         }
 
