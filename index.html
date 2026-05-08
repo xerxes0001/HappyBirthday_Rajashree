@@ -22,6 +22,1319 @@ body{
     -webkit-tap-highlight-color:transparent;
 }
 
+:root{
+    --lavender:#CDB4F6;
+    --lavender-light:#E9D5FF;
+}
+
+/* LOCK */
+
+#lockOverlay{
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at top,#2a183f 0%,#080808 75%);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+    z-index:9999;
+}
+
+/* HEARTS */
+
+.falling-heart{
+    position:fixed;
+    top:-5vh;
+
+    color:var(--lavender);
+
+    font-size:28px;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    text-shadow:
+    0 0 10px rgba(205,180,246,0.9),
+    0 0 20px rgba(205,180,246,0.5),
+    0 0 35px rgba(205,180,246,0.3);
+
+    animation:fallHeart linear forwards;
+}
+
+@keyframes fallHeart{
+
+    to{
+
+        transform:
+        translateY(115vh)
+        rotate(360deg);
+    }
+}
+
+/* GLASS */
+
+.glass-card{
+
+    width:90%;
+    max-width:420px;
+
+    padding:45px 30px;
+
+    border-radius:35px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+    0 0 40px rgba(205,180,246,0.15);
+
+    position:relative;
+    z-index:5;
+
+    text-align:center;
+}
+
+/* TIMER */
+
+#timer{
+    margin-top:25px;
+    font-size:1.5rem;
+    color:var(--lavender);
+    font-family:monospace;
+}
+
+/* START */
+
+#startOverlay{
+
+    display:none;
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+    180deg,
+    #1b1027 0%,
+    #2b183d 100%
+    );
+
+    padding:80px 20px 140px;
+
+    overflow-y:auto;
+
+    flex-direction:column;
+    align-items:center;
+
+    text-align:center;
+}
+
+/* LETTER */
+
+.letter-card{
+
+    max-width:850px;
+
+    margin:auto;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(12px);
+
+    padding:55px 35px;
+
+    border-radius:35px;
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+    0 0 40px rgba(205,180,246,0.15);
+}
+
+#typewriterText{
+
+    max-width:720px;
+
+    margin:auto;
+
+    font-family:Georgia,serif;
+
+    font-size:1.28rem;
+
+    line-height:2.2;
+
+    color:#f5ebff;
+
+    text-align:left;
+}
+
+.word{
+    opacity:0;
+    transition:0.4s;
+    margin-right:5px;
+}
+
+.word.visible{
+    opacity:1;
+}
+
+/* BUTTONS */
+
+.lav-btn{
+
+    background:
+    linear-gradient(
+    135deg,
+    #cdb4f6,
+    #e9d5ff
+    );
+
+    color:black;
+
+    border:none;
+
+    padding:18px 50px;
+
+    border-radius:999px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 0 25px rgba(205,180,246,0.35);
+
+    transition:0.3s;
+}
+
+.lav-btn:hover{
+    transform:scale(1.05);
+}
+
+/* MAIN */
+
+#mainContent{
+    display:none;
+}
+
+.section-title{
+
+    color:var(--lavender);
+
+    text-shadow:
+    0 0 15px rgba(205,180,246,0.4);
+}
+
+/* POLAROIDS */
+
+.polaroid{
+
+    width:300px;
+
+    background:white;
+
+    color:black;
+
+    padding:10px 10px 30px;
+
+    margin:35px auto;
+
+    border-radius:6px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.8),
+    0 0 25px rgba(205,180,246,0.1);
+
+    transition:0.35s;
+}
+
+.polaroid:hover{
+
+    transform:
+    translateY(-8px)
+    scale(1.02);
+}
+
+.polaroid img,
+.polaroid video{
+
+    width:100%;
+    display:block;
+    border-radius:8px;
+}
+
+.pol-cap{
+
+    text-align:center;
+
+    margin-top:10px;
+
+    font-style:italic;
+    font-weight:bold;
+}
+
+.nickname-label{
+
+    text-align:center;
+
+    margin-top:70px;
+
+    color:var(--lavender);
+
+    font-size:2.2rem;
+    font-weight:bold;
+
+    text-shadow:
+    0 0 18px rgba(205,180,246,0.35);
+}
+
+.arrow-connector{
+
+    text-align:center;
+
+    font-size:45px;
+
+    margin:20px 0;
+
+    color:var(--lavender);
+}
+
+/* SNOW */
+
+.falling-photo{
+
+    position:fixed;
+
+    top:-30vh;
+
+    width:155px;
+
+    background:white;
+
+    padding:8px;
+
+    z-index:9000;
+
+    animation:fallPhoto linear forwards;
+}
+
+@keyframes fallPhoto{
+
+    to{
+
+        transform:
+        translateY(130vh)
+        rotate(360deg);
+    }
+}
+
+/* VIEWER */
+
+#photoViewer{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.95);
+
+    z-index:12000;
+
+    justify-content:center;
+    align-items:center;
+}
+
+#bigImg{
+
+    max-width:95vw;
+    max-height:95vh;
+
+    border-radius:12px;
+}
+
+/* BLUR */
+
+.blur-reveal{
+
+    filter:blur(45px);
+
+    transition:3s;
+}
+
+.clear-now{
+
+    filter:blur(0px)!important;
+}
+
+/* FINAL */
+
+#finalWishScreen{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:black;
+
+    z-index:15000;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+
+#finalWishText{
+
+    font-size:3.5rem;
+
+    color:var(--lavender);
+
+    font-family:Georgia,serif;
+
+    text-shadow:
+    0 0 30px rgba(205,180,246,0.5);
+}
+
+/* FEEDBACK */
+
+#feedbackScreen{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:#080808;
+
+    z-index:16000;
+
+    overflow-y:auto;
+
+    padding:40px 20px;
+
+    text-align:center;
+}
+
+#recordBtn{
+
+    width:95px;
+    height:95px;
+
+    border:none;
+    border-radius:50%;
+
+    background:var(--lavender);
+
+    color:black;
+
+    font-size:2rem;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 0 25px rgba(205,180,246,0.35);
+}
+
+</style>
+</head>
+
+<body onload="startLockHearts()">
+
+<!-- LOCK -->
+
+<div id="lockOverlay">
+
+<div class="glass-card">
+
+<h1
+style="
+font-size:3.2rem;
+font-weight:bold;
+color:var(--lavender);
+margin-bottom:10px;
+"
+>
+For Rajashree ❤️
+</h1>
+
+<p
+style="
+color:#e9d5ff;
+margin-bottom:40px;
+"
+>
+A surprise made only for you ✨
+</p>
+
+<input
+id="passInput"
+type="password"
+placeholder="Enter Secret Password"
+
+style="
+width:100%;
+padding:18px;
+border-radius:18px;
+border:2px solid var(--lavender);
+background:#1b1027;
+color:white;
+font-size:1rem;
+text-align:center;
+outline:none;
+"
+/>
+
+<button
+onclick="checkPass()"
+class="lav-btn"
+style="margin-top:25px;width:100%;"
+>
+Unlock My Gift 🎁
+</button>
+
+<div id="timer"></div>
+
+</div>
+
+</div>
+
+<!-- LETTER -->
+
+<div id="startOverlay">
+
+<div class="letter-card">
+
+<h1
+style="
+font-size:3rem;
+font-weight:bold;
+margin-bottom:15px;
+color:var(--lavender);
+"
+>
+Happy Birthday Rajashree 🎂
+</h1>
+
+<p
+style="
+font-size:1.1rem;
+color:#e9d5ff;
+margin-bottom:40px;
+"
+>
+A small universe made only for you ✨
+</p>
+
+<div
+style="
+width:120px;
+height:4px;
+background:var(--lavender);
+margin:0 auto 40px auto;
+border-radius:999px;
+"
+></div>
+
+<div id="typewriterText"></div>
+
+<button
+id="giftBtn"
+onclick="startMainSite()"
+class="lav-btn"
+style="display:none;margin-top:60px;"
+>
+Open My Gift 🎁
+</button>
+
+</div>
+
+</div>
+
+<!-- AUDIO -->
+
+<audio id="bgMusic" loop>
+<source src="background-music.mp3" type="audio/mp3">
+</audio>
+
+<audio id="revealAudio">
+<source src="abhi-maza-aayega.mp3" type="audio/mp3">
+</audio>
+
+<!-- MAIN -->
+
+<div id="mainContent">
+
+<div class="p-6 text-center">
+
+<h1 class="text-5xl font-bold mb-14 section-title">
+Our Story ❤️
+</h1>
+
+<div class="polaroid">
+<video id="v1" loop muted autoplay playsinline>
+<source src="video1.mp4" type="video/mp4">
+</video>
+<p class="pol-cap">Gorgeous ❤️</p>
+</div>
+
+<div class="polaroid">
+<video id="v2" loop muted autoplay playsinline>
+<source src="video2.mp4" type="video/mp4">
+</video>
+<p class="pol-cap">Don 😎</p>
+</div>
+
+<div class="polaroid">
+<video id="v3" loop muted autoplay playsinline>
+<source src="video3.mp4" type="video/mp4">
+</video>
+<p class="pol-cap">Pillu 🍼</p>
+</div>
+
+<button
+onclick="unlockTimeline()"
+class="lav-btn"
+style="margin-top:40px;"
+>
+Open Timeline ↓
+</button>
+
+<div id="timelineSection" class="hidden">
+
+<div class="nickname-label">
+Pillu 🍼
+</div>
+
+<div class="polaroid" onclick="viewPhoto('crybaby.jpg')">
+<img src="crybaby.jpg">
+<p class="pol-cap">Where it started ❤️</p>
+</div>
+
+<div class="polaroid" onclick="viewPhoto('don.jpg')">
+<img src="don.jpg">
+</div>
+
+<div class="arrow-connector">↓</div>
+
+<div class="nickname-label">
+With Aaji ❤️
+</div>
+
+<div class="polaroid" onclick="viewPhoto('aaji.jpg')">
+<img src="aaji.jpg">
+</div>
+
+<div class="arrow-connector">↓</div>
+
+<div class="nickname-label">
+Haircut Era ✂️
+</div>
+
+<div class="polaroid" onclick="viewPhoto('haircut-1.jpg')">
+<img src="haircut-1.jpg">
+</div>
+
+<div class="polaroid" onclick="viewPhoto('haircut-2.jpg')">
+<img src="haircut-2.jpg">
+</div>
+
+<div class="arrow-connector">↓</div>
+
+<div class="nickname-label">
+Traditional 🌸
+</div>
+
+<div class="polaroid" onclick="viewPhoto('traditional.jpg')">
+<img src="traditional.jpg">
+</div>
+
+<div class="polaroid" onclick="viewPhoto('mehndi.jpg')">
+<img src="mehndi.jpg">
+</div>
+
+<div class="arrow-connector">↓</div>
+
+<div class="nickname-label">
+Holi & Trek 🌈
+</div>
+
+<div class="polaroid" onclick="viewPhoto('holi-2-1.jpg')">
+<img src="holi-2-1.jpg">
+</div>
+
+<div class="polaroid" onclick="viewPhoto('trek.jpg')">
+<img src="trek.jpg">
+</div>
+
+<div class="arrow-connector">↓</div>
+
+<div class="nickname-label">
+Red Shirt Era ❤️
+</div>
+
+<div class="polaroid" onclick="viewPhoto('red-shirt.jpg')">
+<img src="red-shirt.jpg">
+</div>
+
+<div class="polaroid" onclick="viewPhoto('red-shirt-2.jpg')">
+<img src="red-shirt-2.jpg">
+</div>
+
+<div class="polaroid" onclick="viewPhoto('red-shirt-3.jpg')">
+<img src="red-shirt-3.jpg">
+</div>
+
+<div class="polaroid" onclick="viewPhoto('red-shirt-4.jpg')">
+<img src="red-shirt-4.jpg">
+</div>
+
+<div class="arrow-connector">↓</div>
+
+<div class="nickname-label">
+Wedding ✨
+</div>
+
+<div class="polaroid" onclick="viewPhoto('wedding.jpg')">
+<img src="wedding.jpg">
+</div>
+
+<div class="polaroid" onclick="viewPhoto('Photo.jpg')">
+<img src="Photo.jpg">
+<p class="pol-cap">Us ❤️</p>
+</div>
+
+<div class="arrow-connector">↓</div>
+
+<div class="nickname-label">
+Forever ❤️
+</div>
+
+<div class="polaroid" onclick="viewPhoto('holi-group.jpg')">
+<img src="holi-group.jpg">
+</div>
+
+<button
+onclick="startFinalSurprise()"
+class="lav-btn"
+style="margin-top:70px;margin-bottom:120px;"
+>
+Final Surprise ✨
+</button>
+
+</div>
+
+</div>
+
+<div
+id="act3"
+class="hidden min-h-screen flex items-center justify-center"
+>
+
+<div
+id="bevdiFrame"
+class="polaroid blur-reveal"
+style="width:320px;"
+>
+<img src="bevdi.jpg">
+
+<p class="pol-cap">
+Wait for it...
+</p>
+
+</div>
+
+</div>
+
+<div id="photoViewer">
+<img id="bigImg">
+</div>
+
+<div id="finalWishScreen">
+<h1 id="finalWishText"></h1>
+</div>
+
+<div id="feedbackScreen">
+
+<h2
+style="
+font-size:2.5rem;
+color:var(--lavender);
+margin-bottom:20px;
+"
+>
+Any Suggestions For Me? ❤️
+</h2>
+
+<p
+style="
+color:#ddd;
+margin-bottom:35px;
+"
+>
+You can record a voice message for me ✨
+</p>
+
+<button id="recordBtn">
+🎙️
+</button>
+
+<p
+id="recordStatus"
+style="
+margin-top:20px;
+font-size:1.1rem;
+"
+>
+Tap To Record
+</p>
+
+<audio
+id="voicePlayback"
+controls
+style="
+margin-top:30px;
+display:none;
+"
+></audio>
+
+</div>
+
+<div
+style="
+position:fixed;
+bottom:12px;
+left:50%;
+transform:translateX(-50%);
+z-index:99999;
+font-size:0.9rem;
+letter-spacing:1px;
+color:#CDB4F6;
+opacity:0.75;
+font-family:Georgia,serif;
+text-shadow:
+0 0 10px rgba(205,180,246,0.3);
+"
+>
+Made by Indraneel for Rajashree ❤️
+</div>
+
+<script>
+
+const message =
+"I first saw you during our 10th grade, and since then, I have had a crush on you. We had our verbal abuse competitions several times, and the second time, you were the clear winner. I was quite dumb, even when you tried to contact me through Telegram. I should have understood the obvious signs and the subtle hints you dropped, like keeping good profile pictures, which I did save, just in case I ever found the courage to propose. But I never did. You know, destiny works in beautiful ways. You were the one who proposed to me; you were the one who caught the hint I dropped: 'You are blunt... Tu tondavar bolte sagla.' Then you practiced for a month just to propose to me on the very first day of the year, 01/01/2026. This was the best New Year present for me, starting the year with the very person I love. I know I messed up quite a lot, but you understood my dumb behavior and forgave me so many times. I have hurt you, but it was never intentional, and it never will be. All I ever want is for you to be happy. Happy Birthday, BonBon / Pillu (Rajashree). I love you so much, my darling.";
+
+const snowfallPhotos = [
+'crybaby.jpg',
+'don.jpg',
+'aaji.jpg',
+'haircut-1.jpg',
+'haircut-2.jpg',
+'traditional.jpg',
+'mehndi.jpg',
+'holi-2-1.jpg',
+'trek.jpg',
+'red-shirt.jpg',
+'red-shirt-2.jpg',
+'red-shirt-3.jpg',
+'red-shirt-4.jpg',
+'wedding.jpg',
+'Photo.jpg',
+'holi-group.jpg'
+];
+
+const targetDate =
+new Date("May 9, 2026 00:00:00").getTime();
+
+function startLockHearts(){
+
+setInterval(()=>{
+
+const heart =
+document.createElement('div');
+
+heart.className =
+'falling-heart';
+
+heart.innerHTML = '❤️';
+
+heart.style.left =
+Math.random() * 95 + 'vw';
+
+heart.style.animationDuration =
+(Math.random() * 3 + 3) + 's';
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},6000);
+
+},350);
+}
+
+function checkPass(){
+
+const pass =
+document.getElementById('passInput')
+.value
+.trim();
+
+if(pass === "BonBon"){
+
+document.getElementById('lockOverlay')
+.style.display = 'none';
+
+document.getElementById('startOverlay')
+.style.display = 'flex';
+
+typeWriter(message);
+
+}else{
+
+alert("Wrong Password ❤️");
+}
+}
+
+function typeWriter(text){
+
+const container =
+document.getElementById('typewriterText');
+
+const words =
+text.split(" ");
+
+words.forEach((word,index)=>{
+
+const span =
+document.createElement('span');
+
+span.className = 'word';
+
+span.innerText = word + " ";
+
+container.appendChild(span);
+
+setTimeout(()=>{
+
+span.classList.add('visible');
+
+if(index === words.length - 1){
+
+document.getElementById('giftBtn')
+.style.display = 'inline-block';
+}
+
+},index * 170);
+
+});
+}
+
+function startMainSite(){
+
+document.getElementById('startOverlay')
+.style.display = 'none';
+
+document.getElementById('mainContent')
+.style.display = 'block';
+
+const music =
+document.getElementById('bgMusic');
+
+if(music){
+
+music.volume = 0.6;
+
+const playPromise =
+music.play();
+
+if(playPromise !== undefined){
+
+playPromise.catch(()=>{
+
+const musicBtn =
+document.createElement('button');
+
+musicBtn.innerText =
+"Play Music 🎵";
+
+musicBtn.style.position =
+"fixed";
+
+musicBtn.style.bottom =
+"20px";
+
+musicBtn.style.right =
+"20px";
+
+musicBtn.style.zIndex =
+"99999";
+
+musicBtn.style.padding =
+"14px 22px";
+
+musicBtn.style.borderRadius =
+"999px";
+
+musicBtn.style.border =
+"none";
+
+musicBtn.style.background =
+"#CDB4F6";
+
+musicBtn.style.color =
+"black";
+
+musicBtn.style.fontWeight =
+"bold";
+
+musicBtn.style.cursor =
+"pointer";
+
+musicBtn.onclick = ()=>{
+
+music.play();
+
+musicBtn.remove();
+};
+
+document.body.appendChild(musicBtn);
+
+});
+}
+}
+
+['v1','v2','v3'].forEach(id=>{
+
+const vid =
+document.getElementById(id);
+
+if(vid){
+
+vid.play().catch(()=>{});
+}
+});
+}
+
+function unlockTimeline(){
+
+const section =
+document.getElementById('timelineSection');
+
+section.classList.remove('hidden');
+
+section.scrollIntoView({
+behavior:'smooth'
+});
+}
+
+function startFinalSurprise(){
+
+document.getElementById('act3')
+.classList.remove('hidden');
+
+document.getElementById('act3')
+.scrollIntoView({
+behavior:'smooth'
+});
+
+setTimeout(()=>{
+
+document.getElementById('bevdiFrame')
+.classList.add('clear-now');
+
+document.getElementById('revealAudio')
+.play()
+.catch(()=>{});
+
+startPhotoSnow();
+
+setTimeout(()=>{
+
+typeFinalWish();
+
+},60000);
+
+},3000);
+}
+
+let snowInterval;
+
+function startPhotoSnow(){
+
+if(snowInterval) return;
+
+snowInterval = setInterval(()=>{
+
+const img =
+snowfallPhotos[
+Math.floor(
+Math.random() *
+snowfallPhotos.length
+)
+];
+
+const el =
+document.createElement('div');
+
+el.className =
+'falling-photo polaroid';
+
+el.style.left =
+(Math.random() * 80) + 'vw';
+
+el.style.animationDuration =
+(Math.random() * 2 + 4) + 's';
+
+el.innerHTML = `
+<img src="${img}">
+<p class="pol-cap"
+style="font-size:0.5rem">
+BonBon 💜
+</p>
+`;
+
+el.onclick = ()=>{
+
+viewPhoto(img);
+};
+
+document.body.appendChild(el);
+
+setTimeout(()=>{
+
+el.remove();
+
+},7000);
+
+},600);
+}
+
+function viewPhoto(img){
+
+const viewer =
+document.getElementById('photoViewer');
+
+document.getElementById('bigImg')
+.src = img;
+
+viewer.style.display = 'flex';
+
+setTimeout(()=>{
+
+viewer.style.display = 'none';
+
+},3000);
+}
+
+function typeFinalWish(){
+
+const screen =
+document.getElementById('finalWishScreen');
+
+const text =
+document.getElementById('finalWishText');
+
+screen.style.display = 'flex';
+
+text.innerHTML = "";
+
+const finalWish =
+"I Love You BonBon ❤️";
+
+let i = 0;
+
+const interval =
+setInterval(()=>{
+
+text.innerHTML += finalWish[i];
+
+i++;
+
+if(i >= finalWish.length){
+
+clearInterval(interval);
+
+setTimeout(()=>{
+
+screen.style.display = 'none';
+
+startVoiceRecorder();
+
+},5000);
+}
+
+},120);
+}
+
+let mediaRecorder;
+
+let audioChunks = [];
+
+function startVoiceRecorder(){
+
+document.getElementById('feedbackScreen')
+.style.display = 'block';
+}
+
+const recordBtn =
+document.getElementById('recordBtn');
+
+recordBtn.onclick = async ()=>{
+
+if(
+!mediaRecorder ||
+mediaRecorder.state === "inactive"
+){
+
+const stream =
+await navigator.mediaDevices
+.getUserMedia({audio:true});
+
+mediaRecorder =
+new MediaRecorder(stream);
+
+audioChunks = [];
+
+mediaRecorder.ondataavailable = e=>{
+
+audioChunks.push(e.data);
+};
+
+mediaRecorder.onstop = ()=>{
+
+const blob =
+new Blob(audioChunks,{
+type:'audio/webm'
+});
+
+const url =
+URL.createObjectURL(blob);
+
+const player =
+document.getElementById('voicePlayback');
+
+player.src = url;
+
+player.style.display = 'block';
+
+stream.getTracks().forEach(track=>{
+
+track.stop();
+});
+
+document.getElementById('recordStatus')
+.innerText =
+"Recording Finished ❤️";
+};
+
+mediaRecorder.start();
+
+document.getElementById('recordStatus')
+.innerText =
+"Recording...";
+
+recordBtn.innerHTML = "⏹️";
+
+}else{
+
+mediaRecorder.stop();
+
+recordBtn.innerHTML = "🎙️";
+}
+}
+
+setInterval(()=>{
+
+const timer =
+document.getElementById('timer');
+
+const now =
+new Date().getTime();
+
+const diff =
+targetDate - now;
+
+if(diff <= 0){
+
+timer.innerText =
+"HAPPY BIRTHDAY ❤️";
+
+return;
+}
+
+const days =
+Math.floor(
+diff / (1000*60*60*24)
+);
+
+const hrs =
+Math.floor(
+(diff % (1000*60*60*24))
+/
+(1000*60*60)
+);
+
+const mins =
+Math.floor(
+(diff % (1000*60*60))
+/
+(1000*60)
+);
+
+const secs =
+Math.floor(
+(diff % (1000*60))
+/1000
+);
+
+timer.innerText =
+`${days}d ${hrs}h ${mins}m ${secs}s`;
+
+},1000);
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Rajashree ❤️</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+html,
+body{
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+    background:#080808;
+    color:white;
+    font-family:sans-serif;
+    scroll-behavior:smooth;
+    -webkit-tap-highlight-color:transparent;
+}
+
 /* MAIN THEME COLORS */
 
 :root{
