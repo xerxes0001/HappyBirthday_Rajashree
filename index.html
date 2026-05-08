@@ -9,8 +9,7 @@
 
 <style>
 
-html,
-body{
+html,body{
 margin:0;
 padding:0;
 overflow-x:hidden;
@@ -23,10 +22,7 @@ scroll-behavior:smooth;
 
 :root{
 --lavender:#CDB4F6;
---lavender-light:#E9D5FF;
 }
-
-/* LOCK */
 
 #lockOverlay{
 position:fixed;
@@ -40,8 +36,6 @@ overflow:hidden;
 z-index:9999;
 }
 
-/* HEARTS */
-
 .falling-heart{
 position:fixed;
 top:-5vh;
@@ -49,11 +43,10 @@ color:var(--lavender);
 font-size:28px;
 pointer-events:none;
 z-index:1;
+animation:fallHeart linear forwards;
 text-shadow:
 0 0 10px rgba(205,180,246,0.9),
-0 0 20px rgba(205,180,246,0.5),
-0 0 35px rgba(205,180,246,0.3);
-animation:fallHeart linear forwards;
+0 0 20px rgba(205,180,246,0.5);
 }
 
 @keyframes fallHeart{
@@ -63,8 +56,6 @@ translateY(115vh)
 rotate(360deg);
 }
 }
-
-/* GLASS */
 
 .glass-card{
 width:90%;
@@ -81,16 +72,12 @@ z-index:5;
 text-align:center;
 }
 
-/* TIMER */
-
 #timer{
 margin-top:25px;
 font-size:1.5rem;
 color:var(--lavender);
 font-family:monospace;
 }
-
-/* START */
 
 #startOverlay{
 display:none;
@@ -107,8 +94,6 @@ flex-direction:column;
 align-items:center;
 text-align:center;
 }
-
-/* LETTER */
 
 .letter-card{
 max-width:850px;
@@ -142,8 +127,6 @@ margin-right:5px;
 opacity:1;
 }
 
-/* BUTTONS */
-
 .lav-btn{
 background:
 linear-gradient(
@@ -166,8 +149,6 @@ transition:0.3s;
 transform:scale(1.05);
 }
 
-/* MAIN */
-
 #mainContent{
 display:none;
 }
@@ -177,8 +158,6 @@ color:var(--lavender);
 text-shadow:
 0 0 15px rgba(205,180,246,0.4);
 }
-
-/* POLAROIDS */
 
 .polaroid{
 width:300px;
@@ -219,8 +198,6 @@ margin-top:70px;
 color:var(--lavender);
 font-size:2.2rem;
 font-weight:bold;
-text-shadow:
-0 0 18px rgba(205,180,246,0.35);
 }
 
 .arrow-connector{
@@ -229,8 +206,6 @@ font-size:45px;
 margin:20px 0;
 color:var(--lavender);
 }
-
-/* SNOW */
 
 .falling-photo{
 position:fixed;
@@ -250,26 +225,6 @@ rotate(360deg);
 }
 }
 
-/* VIEWER */
-
-#photoViewer{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.95);
-z-index:12000;
-justify-content:center;
-align-items:center;
-}
-
-#bigImg{
-max-width:95vw;
-max-height:95vh;
-border-radius:12px;
-}
-
-/* BLUR */
-
 .blur-reveal{
 filter:blur(45px);
 transition:3s;
@@ -279,7 +234,24 @@ transition:3s;
 filter:blur(0px)!important;
 }
 
-/* FINAL */
+#photoViewer{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.96);
+z-index:12000;
+justify-content:center;
+align-items:center;
+backdrop-filter:blur(8px);
+}
+
+#bigImg{
+max-width:95vw;
+max-height:95vh;
+border-radius:18px;
+box-shadow:
+0 0 40px rgba(205,180,246,0.3);
+}
 
 #finalWishScreen{
 display:none;
@@ -299,8 +271,6 @@ font-family:Georgia,serif;
 text-shadow:
 0 0 30px rgba(205,180,246,0.5);
 }
-
-/* FEEDBACK */
 
 #feedbackScreen{
 display:none;
@@ -322,16 +292,12 @@ background:var(--lavender);
 color:black;
 font-size:2rem;
 cursor:pointer;
-box-shadow:
-0 0 25px rgba(205,180,246,0.35);
 }
 
 </style>
 </head>
 
 <body onload="startLockHearts()">
-
-<!-- LOCK -->
 
 <div id="lockOverlay">
 
@@ -389,8 +355,6 @@ Unlock My Gift 🎁
 
 </div>
 
-<!-- LETTER -->
-
 <div id="startOverlay">
 
 <div class="letter-card">
@@ -405,26 +369,6 @@ color:var(--lavender);
 >
 Happy Birthday Rajashree 🎂
 </h1>
-
-<p
-style="
-font-size:1.1rem;
-color:#e9d5ff;
-margin-bottom:40px;
-"
->
-A small universe made only for you ✨
-</p>
-
-<div
-style="
-width:120px;
-height:4px;
-background:var(--lavender);
-margin:0 auto 40px auto;
-border-radius:999px;
-"
-></div>
 
 <div id="typewriterText"></div>
 
@@ -441,17 +385,13 @@ Open My Gift 🎁
 
 </div>
 
-<!-- AUDIO -->
-
 <audio id="bgMusic" loop>
-<source src="background-music.mp3" type="audio/mp3">
+<source src="background-music.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="revealAudio">
-<source src="abhi-maza-aayega.mp3" type="audio/mp3">
+<source src="abhi-maza-aayega.mp3" type="audio/mpeg">
 </audio>
-
-<!-- MAIN -->
 
 <div id="mainContent">
 
@@ -468,20 +408,6 @@ Our Story ❤️
 <p class="pol-cap">Gorgeous ❤️</p>
 </div>
 
-<div class="polaroid">
-<video id="v2" loop muted autoplay playsinline>
-<source src="video2.mp4" type="video/mp4">
-</video>
-<p class="pol-cap">Don 😎</p>
-</div>
-
-<div class="polaroid">
-<video id="v3" loop muted autoplay playsinline>
-<source src="video3.mp4" type="video/mp4">
-</video>
-<p class="pol-cap">Pillu 🍼</p>
-</div>
-
 <button
 onclick="unlockTimeline()"
 class="lav-btn"
@@ -492,116 +418,8 @@ Open Timeline ↓
 
 <div id="timelineSection" class="hidden">
 
-<div class="nickname-label">
-Pillu 🍼
-</div>
-
-<div class="polaroid" onclick="viewPhoto('crybaby.jpg')">
-<img src="crybaby.jpg">
-<p class="pol-cap">Where it started ❤️</p>
-</div>
-
-<div class="polaroid" onclick="viewPhoto('don.jpg')">
-<img src="don.jpg">
-</div>
-
-<div class="arrow-connector">↓</div>
-
-<div class="nickname-label">
-With Aaji ❤️
-</div>
-
-<div class="polaroid" onclick="viewPhoto('aaji.jpg')">
-<img src="aaji.jpg">
-</div>
-
-<div class="arrow-connector">↓</div>
-
-<div class="nickname-label">
-Haircut Era ✂️
-</div>
-
-<div class="polaroid" onclick="viewPhoto('haircut-1.jpg')">
-<img src="haircut-1.jpg">
-</div>
-
-<div class="polaroid" onclick="viewPhoto('haircut-2.jpg')">
-<img src="haircut-2.jpg">
-</div>
-
-<div class="arrow-connector">↓</div>
-
-<div class="nickname-label">
-Traditional 🌸
-</div>
-
-<div class="polaroid" onclick="viewPhoto('traditional.jpg')">
-<img src="traditional.jpg">
-</div>
-
-<div class="polaroid" onclick="viewPhoto('mehndi.jpg')">
-<img src="mehndi.jpg">
-</div>
-
-<div class="arrow-connector">↓</div>
-
-<div class="nickname-label">
-Holi & Trek 🌈
-</div>
-
-<div class="polaroid" onclick="viewPhoto('holi-2-1.jpg')">
-<img src="holi-2-1.jpg">
-</div>
-
-<div class="polaroid" onclick="viewPhoto('trek.jpg')">
-<img src="trek.jpg">
-</div>
-
-<div class="arrow-connector">↓</div>
-
-<div class="nickname-label">
-Red Shirt Era ❤️
-</div>
-
-<div class="polaroid" onclick="viewPhoto('red-shirt.jpg')">
-<img src="red-shirt.jpg">
-</div>
-
-<div class="polaroid" onclick="viewPhoto('red-shirt-2.jpg')">
-<img src="red-shirt-2.jpg">
-</div>
-
-<div class="polaroid" onclick="viewPhoto('red-shirt-3.jpg')">
-<img src="red-shirt-3.jpg">
-</div>
-
-<div class="polaroid" onclick="viewPhoto('red-shirt-4.jpg')">
-<img src="red-shirt-4.jpg">
-</div>
-
-<div class="arrow-connector">↓</div>
-
-<div class="nickname-label">
-Wedding ✨
-</div>
-
-<div class="polaroid" onclick="viewPhoto('wedding.jpg')">
-<img src="wedding.jpg">
-</div>
-
 <div class="polaroid" onclick="viewPhoto('Photo.jpg')">
 <img src="Photo.jpg">
-<p class="pol-cap">Us ❤️</p>
-</div>
-
-<div class="arrow-connector">↓</div>
-
-<div class="nickname-label">
-Forever ❤️
-</div>
-
-<div class="polaroid" onclick="viewPhoto('holi-group.jpg')">
-<img src="holi-group.jpg">
 </div>
 
 <button
@@ -656,26 +474,11 @@ margin-bottom:20px;
 Any Suggestions For Me? ❤️
 </h2>
 
-<p
-style="
-color:#ddd;
-margin-bottom:35px;
-"
->
-You can record a voice message for me ✨
-</p>
-
 <button id="recordBtn">
 🎙️
 </button>
 
-<p
-id="recordStatus"
-style="
-margin-top:20px;
-font-size:1.1rem;
-"
->
+<p id="recordStatus">
 Tap To Record
 </p>
 
@@ -702,8 +505,6 @@ letter-spacing:1px;
 color:#CDB4F6;
 opacity:0.75;
 font-family:Georgia,serif;
-text-shadow:
-0 0 10px rgba(205,180,246,0.3);
 "
 >
 Made by Indraneel for Rajashree ❤️
@@ -712,25 +513,12 @@ Made by Indraneel for Rajashree ❤️
 <script>
 
 const message =
-"I first saw you during our 10th grade, and since then, I have had a crush on you. We had our verbal abuse competitions several times, and the second time, you were the clear winner. I was quite dumb, even when you tried to contact me through Telegram. I should have understood the obvious signs and the subtle hints you dropped, like keeping good profile pictures, which I did save, just in case I ever found the courage to propose. But I never did. You know, destiny works in beautiful ways. You were the one who proposed to me; you were the one who caught the hint I dropped: 'You are blunt... Tu tondavar bolte sagla.' Then you practiced for a month just to propose to me on the very first day of the year, 01/01/2026. This was the best New Year present for me, starting the year with the very person I love. I know I messed up quite a lot, but you understood my dumb behavior and forgave me so many times. I have hurt you, but it was never intentional, and it never will be. All I ever want is for you to be happy. Happy Birthday, BonBon / Pillu (Rajashree). I love you so much, my darling.";
+"I Love You BonBon ❤️";
 
 const snowfallPhotos = [
-'crybaby.jpg',
-'don.jpg',
-'aaji.jpg',
-'haircut-1.jpg',
-'haircut-2.jpg',
-'traditional.jpg',
-'mehndi.jpg',
-'holi-2-1.jpg',
-'trek.jpg',
-'red-shirt.jpg',
-'red-shirt-2.jpg',
-'red-shirt-3.jpg',
-'red-shirt-4.jpg',
-'wedding.jpg',
 'Photo.jpg',
-'holi-group.jpg'
+'wedding.jpg',
+'red-shirt.jpg'
 ];
 
 const targetDate =
@@ -835,14 +623,12 @@ document.getElementById('bgMusic');
 
 if(music){
 
-music.volume = 0.6;
+music.volume = 0.7;
 
-const playPromise =
-music.play();
+music.muted = false;
 
-if(playPromise !== undefined){
-
-playPromise.catch(()=>{
+music.play()
+.catch(()=>{
 
 const musicBtn =
 document.createElement('button');
@@ -894,18 +680,6 @@ document.body.appendChild(musicBtn);
 
 });
 }
-}
-
-['v1','v2','v3'].forEach(id=>{
-
-const vid =
-document.getElementById(id);
-
-if(vid){
-
-vid.play().catch(()=>{});
-}
-});
 }
 
 function unlockTimeline(){
@@ -980,10 +754,6 @@ el.style.animationDuration =
 
 el.innerHTML = `
 <img src="${img}">
-<p class="pol-cap"
-style="font-size:0.5rem">
-BonBon 💜
-</p>
 `;
 
 el.onclick = ()=>{
@@ -1007,16 +777,18 @@ function viewPhoto(img){
 const viewer =
 document.getElementById('photoViewer');
 
-document.getElementById('bigImg')
-.src = img;
+const bigImg =
+document.getElementById('bigImg');
+
+bigImg.src = img;
 
 viewer.style.display = 'flex';
 
-setTimeout(()=>{
+viewer.onclick = ()=>{
 
 viewer.style.display = 'none';
+};
 
-},3000);
 }
 
 function typeFinalWish(){
