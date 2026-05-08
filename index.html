@@ -14,13 +14,11 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 5000; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center; padding: 20px;
-            overflow: hidden; /* Lock background during these screens */
+            overflow: hidden;
         }
         
-        /* Lock Screen - Black BG */
         #lockOverlay { background: #080808; z-index: 6000; }
         
-        /* Vintage Letter Screen - Parchment BG */
         #startOverlay {
             background: radial-gradient(circle, #e2c08d 0%, #c19a6b 100%);
             box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
@@ -39,7 +37,7 @@
         }
         @keyframes fallHeart { to { transform: translateY(115vh) rotate(360deg); } }
 
-        /* 3. TYPEWRITER TEXT LOGIC */
+        /* 3. TYPEWRITER TEXT */
         #typewriterText { font-family: 'Georgia', serif; font-style: italic; font-size: 1.2rem; line-height: 1.7; color: #3d2b1f; max-width: 600px; text-shadow: 1px 1px 0 rgba(255,255,255,0.2); }
         .word { opacity: 0; display: inline-block; margin-right: 5px; transition: opacity 0.4s ease; }
         .word.visible { opacity: 1; }
@@ -65,7 +63,6 @@
         }
         @keyframes fallPhoto { to { transform: translateY(125vh) rotate(360deg); } }
         
-        /* THE FLOATING BACKGROUND HEARTS (Act 1, 2) */
         .heart-snow { position: fixed; font-size: 22px; z-index: 99; animation: floatUp linear infinite; pointer-events: none; color: #D1B3FF; }
         @keyframes floatUp { from { transform: translateY(100vh); opacity: 1; } to { transform: translateY(-10vh); opacity: 0; } }
 
@@ -78,7 +75,7 @@
         .record-btn.recording { animation: pulse 1s infinite; background: #fff; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         
-        /* REVEAL LOGIC */
+        /* LIGHTBOX */
         .blur-reveal { filter: blur(40px); transition: filter 2.5s ease-in-out; }
         .clear-now { filter: blur(0px) !important; }
         #photoViewer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 10000; align-items: center; justify-content: center; }
@@ -100,9 +97,7 @@
     <div id="startOverlay" class="hidden">
         <h1 id="bdayHeader" class="text-3xl font-bold mb-6 mt-4" style="color: #3d2b1f;">Wait for it... ⏳</h1>
         <div id="typewriterText"></div>
-        <button id="giftBtn" onclick="startMainSite()" class="hidden bg-stone-800 text-amber-50 px-12 py-5 rounded-full mt-6 shadow-2xl animate__animated animate__pulse animate__infinite">
-            Open My Gift 🎁
-        </button>
+        <button id="giftBtn" onclick="startMainSite()" class="hidden bg-stone-800 text-amber-50 px-12 py-5 rounded-full mt-6 shadow-2xl">Open My Gift 🎁</button>
     </div>
 
     <div id="audio-storage"></div>
@@ -121,45 +116,45 @@
 
         <div id="act2" class="hidden p-6 text-center">
             <div class="nickname-label">Pillu 🍼</div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('crybaby')" style="transform: rotate(2deg);"><img src="crybaby"><p class="pol-cap">Where it started</p></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('crybaby')"><img src="crybaby"><p class="pol-cap">Baby Pillu</p></div>
             <div class="arrow-connector">↓</div>
             
             <div class="nickname-label">With Aaji ❤️</div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('aaji')" style="transform: rotate(-2deg);"><img src="aaji"></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('aaji')"><img src="aaji"></div>
             <div class="arrow-connector">↓</div>
             
-            <div class="nickname-label">The Haircut Days 💇‍♀️</div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('haircut-1')" style="transform: rotate(1deg);"><img src="haircut-1"></div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('haircut-2')" style="transform: rotate(-2deg);"><img src="haircut-2"></div>
+            <div class="nickname-label">Haircut Days 💇‍♀️</div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('haircut-1')"><img src="haircut-1"></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('haircut-2')"><img src="haircut-2"></div>
             <div class="arrow-connector">↓</div>
             
             <div class="nickname-label">Traditional Vibes 🌸</div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('traditional')" style="transform: rotate(2deg);"><img src="traditional"></div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('menhdi')" style="transform: rotate(-1deg);"><img src="menhdi"></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('traditional')"><img src="traditional"></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('menhdi')"><img src="menhdi"></div>
             <div class="arrow-connector">↓</div>
             
             <div class="nickname-label">Trek & Adventure ⛰️</div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('trek')" style="transform: rotate(3deg);"><img src="trek"></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('trek')"><img src="trek"></div>
             <div class="arrow-connector">↓</div>
             
             <div class="nickname-label">Holi Colors 🌈</div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('Holi-4')" style="transform: rotate(-2deg);"><img src="Holi-4"></div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('Holi grp')" style="transform: rotate(1deg);"><img src="Holi grp"></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('Holi-4')"><img src="Holi-4"></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('Holi grp')"><img src="Holi grp"></div>
             <div class="arrow-connector">↓</div>
             
             <div class="nickname-label">Style Icon 🕶️</div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('red shirt')" style="transform: rotate(-1deg);"><img src="red shirt"></div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('kurta-1')" style="transform: rotate(2deg);"><img src="kurta-1"></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('red shirt')"><img src="red shirt"></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('kurta-1')"><img src="kurta-1"></div>
             <div class="arrow-connector">↓</div>
             
             <div class="nickname-label">Bevdi ❤️</div>
-            <div class="polaroid timeline-polaroid" onclick="viewPhoto('wedding')" style="transform: rotate(-3deg);"><img src="wedding"></div>
+            <div class="polaroid timeline-polaroid" onclick="viewPhoto('wedding')"><img src="wedding"></div>
             
             <button onclick="startFinalSurprise()" class="mt-16 mb-20 bg-gradient-to-r from-purple-500 to-indigo-400 text-black px-12 py-5 rounded-full font-bold shadow-2xl">Final Surprise ✨</button>
         </div>
 
         <div id="act3" class="hidden min-h-screen flex items-center justify-center">
-            <div class="polaroid blur-reveal" id="bevdiFrame"><img src="bevdi"><p class="pol-cap" id="statusText">Wait for it...</p></div>
+            <div class="polaroid blur-reveal" id="bevdiFrame"><img src="bevdi"><p class="pol-cap" id="statusText">Wait...</p></div>
         </div>
     </div>
 
@@ -185,11 +180,12 @@
         let heartInterval;
         let lockHeartInterval;
         let photoSnowInterval;
-        let isBirthdayTime = true; // CRITICAL: SET TO FALSE FOR MAY 9th LAUNCH
+
+        // TEST MODE: Set to TRUE for testing now. Change to FALSE before sending.
+        let isBirthdayTime = true; 
         
         const targetDate = new Date("May 9, 2026 00:00:00").getTime();
 
-        // ACT 0: LAVENDER RAIN (Password Screen)
         function startLockHearts() {
             lockHeartInterval = setInterval(() => {
                 const h = document.createElement('div');
@@ -201,7 +197,6 @@
             }, 300);
         }
 
-        // TIMER & LOCK LOGIC
         setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
@@ -216,22 +211,16 @@
 
         function checkPass() {
             if(document.getElementById('passInput').value === "BonBon") {
-                clearInterval(lockHeartInterval); // Kill Lock Hearts
+                clearInterval(lockHeartInterval);
                 document.querySelectorAll('.falling-heart').forEach(h => h.remove());
-                
                 document.getElementById('lockOverlay').style.display = 'none';
                 document.getElementById('startOverlay').style.display = 'flex';
-                
-                // MOBILE FIX: Force letter container to the absolute top
                 document.getElementById('startOverlay').scrollTop = 0;
                 window.scrollTo(0, 0);
-
-                if(isBirthdayTime) document.getElementById('bdayHeader').innerText = "Happy Birthday Rajashree 🎂✨";
                 typeWriter(message, 'typewriterText', 'giftBtn');
             } else { document.getElementById('errorMsg').classList.remove('hidden'); }
         }
 
-        // TYPEWRITER ENGINE
         function typeWriter(text, targetId, btnId) {
             const container = document.getElementById(targetId);
             container.innerHTML = "";
@@ -242,23 +231,22 @@
                 container.appendChild(span);
                 setTimeout(() => {
                     span.classList.add('visible');
-                    // Letter Container moves as it types to maintain visibility
-                    document.getElementById('startOverlay').scrollTop = document.getElementById('startOverlay').scrollHeight;
-                    if (i === words.length - 1 && btnId && isBirthdayTime) document.getElementById(btnId).classList.remove('hidden');
-                }, i * 200); 
+                    const overlay = document.getElementById('startOverlay');
+                    overlay.scrollTop = overlay.scrollHeight;
+                    if (i === words.length - 1 && isBirthdayTime) {
+                        document.getElementById(btnId).classList.remove('hidden');
+                    }
+                }, i * 200);
             });
         }
 
-        // ACT 1: MAIN SITE REVEAL
         function startMainSite() {
             document.getElementById('startOverlay').style.display = 'none';
             document.getElementById('mainContent').classList.remove('hidden');
-            window.scrollTo(0, 0); // Reset scroll for Act 1
-            
+            window.scrollTo(0, 0);
             document.getElementById('audio-storage').innerHTML = '<iframe width="0" height="0" src="https://www.youtube.com/embed/QJO3ROT-A4E?autoplay=1&loop=1&playlist=QJO3ROT-A4E" frameborder="0" allow="autoplay"></iframe>';
             document.getElementById('v1').play(); document.getElementById('v2').play(); document.getElementById('v3').play();
             
-            // ACT 2 HEARTS (Floating Up)
             heartInterval = setInterval(() => {
                 const h = document.createElement('div');
                 h.innerHTML = '💜'; h.className = 'heart-snow';
@@ -274,7 +262,6 @@
             document.getElementById('act2').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // ACT 3: THE BIG REVEAL
         function startFinalSurprise() {
             document.getElementById('act3').classList.remove('hidden');
             document.getElementById('act3').scrollIntoView({ behavior: 'smooth' });
@@ -287,7 +274,6 @@
             }, 3500); 
         }
 
-        // ACT 3: THE PERFECT PHOTO SNOW (Falling Polariods)
         function startPhotoSnow() {
             photoSnowInterval = setInterval(() => {
                 const img = allPhotos[Math.floor(Math.random() * allPhotos.length)];
@@ -295,20 +281,17 @@
                 el.className = 'falling-photo';
                 el.style.left = Math.random() * 80 + 'vw';
                 el.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                el.onclick = () => viewPhoto(img); // CLICK TO VIEW
+                el.onclick = () => viewPhoto(img);
                 el.innerHTML = `<img src="${img}"><p class="pol-cap">Pillu 💜</p>`;
                 document.body.appendChild(el);
                 setTimeout(() => el.remove(), 5000);
             }, 600);
 
-            // END SEQUENCE TRAP: Moves to typing wish after 18 seconds
             setTimeout(() => {
                 clearInterval(photoSnowInterval);
                 document.getElementById('mainContent').style.display = 'none';
                 document.getElementById('finalWishScreen').style.display = 'flex';
                 typeWriter(wishMsg, 'finalWishText');
-                
-                // Final Step: Moves to feedback after wish is done (Approx 8s)
                 setTimeout(() => {
                     document.getElementById('finalWishScreen').style.display = 'none';
                     document.getElementById('feedbackScreen').style.display = 'flex';
@@ -321,7 +304,6 @@
             document.getElementById('photoViewer').style.display = 'flex';
         }
 
-        // Voice Recorder Logic (Keep from previous)
         let mediaRecorder; let chunks = [];
         document.getElementById('recordBtn').onclick = async () => {
             const btn = document.getElementById('recordBtn');
