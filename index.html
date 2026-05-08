@@ -15,13 +15,8 @@
             background: #080808; z-index: 9000; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center;
         }
-
-        /* LAVENDER HEARTS - RANDOM SPREAD */
         .falling-heart { 
-            position: fixed; top: -5vh; 
-            color: #D1B3FF !important; 
-            text-shadow: 0 0 10px rgba(209, 179, 255, 0.9);
-            font-size: 28px; z-index: 8500; 
+            position: fixed; top: -5vh; z-index: 8500; 
             animation: fallHeart linear forwards; pointer-events: none;
         }
         @keyframes fallHeart { to { transform: translateY(115vh) rotate(360deg); } }
@@ -31,54 +26,33 @@
             display: none; width: 100%; height: 100vh;
             background: radial-gradient(circle, #e2c08d 0%, #c19a6b 100%);
             z-index: 5500; flex-direction: column; align-items: center; 
-            padding: 100px 20px 150px 20px; 
+            padding: 80px 20px 150px 20px; 
             box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
             overflow-y: scroll; scroll-behavior: smooth;
         }
-
-        #typewriterText {
-            font-family: 'Georgia', serif; font-style: italic; font-size: 1.25rem;
-            line-height: 1.8; color: #3d2b1f; text-align: center; max-width: 600px;
-        }
+        #typewriterText { font-family: 'Georgia', serif; font-style: italic; font-size: 1.25rem; line-height: 1.8; color: #3d2b1f; text-align: center; max-width: 600px; }
         .word { opacity: 0; display: inline-block; margin-right: 5px; transition: opacity 0.4s ease; }
         .word.visible { opacity: 1; }
 
         /* 3. TIMELINE & POLAROID */
-        .polaroid { 
-            background: #ffffff; padding: 10px 10px 35px 10px; border-radius: 2px; 
-            box-shadow: 0 10px 30px rgba(209, 179, 255, 0.4); width: 280px; 
-            margin: 30px auto; color: #333;
-        }
+        .polaroid { background: #ffffff; padding: 10px 10px 35px 10px; border-radius: 2px; box-shadow: 0 10px 30px rgba(209, 179, 255, 0.4); width: 280px; margin: 30px auto; color: #333; }
         .polaroid img, .polaroid video { width: 100%; height: auto; display: block; background: #000; }
         .pol-cap { text-align: center; font-style: italic; font-weight: bold; margin-top: 10px; font-size: 0.95rem;}
         .nickname-label { color: #D1B3FF; font-size: 2.2rem; font-weight: bold; margin-top: 60px; text-align: center; }
         .arrow-connector { color: #444; font-size: 45px; margin: 20px 0; text-align: center; }
 
-        /* 4. PHOTO SNOWFALL PHYSICS */
-        .falling-photo { 
-            position: fixed; top: -30vh; z-index: 8000; 
-            width: 150px; padding: 8px; background: #fff; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-            animation: fallPhoto linear forwards; touch-action: none;
-        }
+        /* 4. PHOTO SNOWFALL */
+        .falling-photo { position: fixed; top: -30vh; z-index: 8000; width: 150px; padding: 8px; background: #fff; box-shadow: 0 15px 35px rgba(0,0,0,0.8); animation: fallPhoto linear forwards; touch-action: none; }
         @keyframes fallPhoto { to { transform: translateY(130vh) rotate(360deg); } }
 
         /* 5. FINALE */
-        #finalWishScreen, #feedbackScreen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            display: none; flex-direction: column; align-items: center; 
-            justify-content: center; text-align: center; z-index: 9999;
-        }
+        #finalWishScreen, #feedbackScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; z-index: 9999; }
         #finalWishScreen { background: #080808; }
-        #feedbackScreen { background: #000; }
-
         #photoViewer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 11000; align-items: center; justify-content: center; }
         .blur-reveal { filter: blur(45px); transition: filter 3s ease-in-out; }
         .clear-now { filter: blur(0px) !important; }
-
-        .record-btn { background: #ff4d4d; width: 90px; height: 90px; border-radius: 50%; border: 4px solid #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .record-btn { background: #ff4d4d; width: 85px; height: 85px; border-radius: 50%; border: 4px solid #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
         .record-btn.recording { animation: pulse 1s infinite; background: #fff; color: #ff4d4d; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body onload="startLockHearts()">
@@ -103,9 +77,9 @@
         <div class="p-6 text-center">
             <h1 class="text-4xl font-bold mb-12 text-purple-300">Our Story ❤️</h1>
             
-            <div class="polaroid" style="transform: rotate(-3deg);"><video id="v1" loop muted playsinline><source src="1778037251143.mp4"></video><p class="pol-cap">Gorgeous ❤️</p></div>
-            <div class="polaroid" style="transform: rotate(2deg);"><video id="v2" loop muted playsinline><source src="VID-20260124-WA0003(1).mp4"></video><p class="pol-cap">Don 😎</p></div>
-            <div class="polaroid" style="transform: rotate(-1deg);"><video id="v3" loop muted playsinline><source src="doc_2026-05-06_13-28-43.mp4"></video><p class="pol-cap">Pillu 🍼</p></div>
+            <div class="polaroid"><video id="v1" loop muted playsinline><source src="1778037251143.mp4"></video><p class="pol-cap">Gorgeous ❤️</p></div>
+            <div class="polaroid"><video id="v2" loop muted playsinline><source src="VID-20260124-WA0003(1).mp4"></video><p class="pol-cap">Don 😎</p></div>
+            <div class="polaroid"><video id="v3" loop muted playsinline><source src="doc_2026-05-06_13-28-43.mp4"></video><p class="pol-cap">Pillu 🍼</p></div>
             
             <button onclick="unlockTimeline()" class="bg-purple-600 text-white px-14 py-5 rounded-full mt-16 font-bold shadow-xl">See Your Journey ↓</button>
             
@@ -116,25 +90,22 @@
                 
                 <div class="nickname-label">With Aaji ❤️</div>
                 <div class="polaroid" onclick="viewPhoto('aaji.jpg')"><img src="aaji.jpg"></div>
-                <div class="polaroid" onclick="viewPhoto('aaji-2.jpg')"><img src="aaji-2.jpg"></div>
                 <div class="arrow-connector">↓</div>
 
-                <div class="nickname-label">Haircut Days 💇‍♀️</div>
+                <div class="nickname-label">The Haircut Days 💇‍♀️</div>
                 <div class="polaroid" onclick="viewPhoto('haircut-1.jpg')"><img src="haircut-1.jpg"></div>
                 <div class="polaroid" onclick="viewPhoto('haircut-2.jpg')"><img src="haircut-2.jpg"></div>
-                <div class="polaroid" onclick="viewPhoto('haircut-3.jpg')"><img src="haircut-3.jpg"></div>
                 <div class="arrow-connector">↓</div>
 
                 <div class="nickname-label">Traditional Vibes 🌸</div>
                 <div class="polaroid" onclick="viewPhoto('traditional.jpg')"><img src="traditional.jpg"></div>
-                <div class="polaroid" onclick="viewPhoto('traditional-2.jpg')"><img src="traditional-2.jpg"></div>
                 <div class="polaroid" onclick="viewPhoto('menhdi.jpg')"><img src="menhdi.jpg"></div>
                 <div class="arrow-connector">↓</div>
 
                 <div class="nickname-label">Holi Colors 🌈</div>
-                <div class="polaroid" onclick="viewPhoto('holi-2.jpg')"><img src="holi-2.jpg"></div>
+                <div class="polaroid" onclick="viewPhoto('holi-2-1.jpg')"><img src="holi-2-1.jpg"></div>
                 <div class="polaroid" onclick="viewPhoto('Holi-4.jpg')"><img src="Holi-4.jpg"></div>
-                <div class="polaroid" onclick="viewPhoto('Holi-grp.jpg')"><img src="Holi-grp.jpg"></div>
+                <div class="polaroid" onclick="viewPhoto('Holi grp.jpg')"><img src="Holi grp.jpg"></div>
                 <div class="arrow-connector">↓</div>
 
                 <div class="nickname-label">Trek ⛰️</div>
@@ -142,14 +113,14 @@
                 <div class="arrow-connector">↓</div>
 
                 <div class="nickname-label">Style Icon 🕶️</div>
-                <div class="polaroid" onclick="viewPhoto('red-shirt.jpg')"><img src="red-shirt.jpg"></div>
-                <div class="polaroid" onclick="viewPhoto('red-shirt-2.jpg')"><img src="red-shirt-2.jpg"></div>
+                <div class="polaroid" onclick="viewPhoto('red shirt.jpg')"><img src="red shirt.jpg"></div>
+                <div class="polaroid" onclick="viewPhoto('red shirt-2.jpg')"><img src="red shirt-2.jpg"></div>
                 <div class="polaroid" onclick="viewPhoto('kurta-1.jpg')"><img src="kurta-1.jpg"></div>
+                <div class="polaroid" onclick="viewPhoto('kurta-2.jpg')"><img src="kurta-2.jpg"></div>
                 <div class="arrow-connector">↓</div>
 
                 <div class="nickname-label">Gorgeous ❤️</div>
                 <div class="polaroid" onclick="viewPhoto('wedding.jpg')"><img src="wedding.jpg"></div>
-                <div class="polaroid" onclick="viewPhoto('wedding-entry.jpg')"><img src="wedding-entry.jpg"></div>
                 
                 <button onclick="startFinalSurprise()" class="mt-28 mb-44 bg-gradient-to-r from-purple-500 to-indigo-400 text-black px-16 py-7 rounded-full font-bold shadow-2xl">Final Surprise ✨</button>
             </div>
@@ -177,13 +148,14 @@
         const message = "I first saw you during our 10th grade, and since then, I have had a crush on you. We had our verbal abuse competitions several times, and the second time, you were the clear winner. I was quite dumb, even when you tried to contact me through Telegram. I should have understood the obvious signs and the subtle hints you dropped—like keeping good profile pictures, which I did save, just in case I ever found the courage to propose. But I never did. You know, destiny works in beautiful ways. You were the one who proposed to me; you were the one who caught the hint I dropped: 'You are blunt... Tu tondavar bolte sagla.' Then you practiced for a month just to propose to me on the very first day of the year—01/01/2026. This was the best New Year present for me—starting the year with the very person I love. I know I messed up quite a lot, but you understood my dumb behavior and forgave me so many times. I have hurt you, but it was never intentional, and it never will be. All I ever want is for you to be happy. Happy Birthday, BonBon / Pillu (Rajashree). I love you so much, my darling.";
         const wishMsg = "I love you BonBon. Wishing you a very happy Birthday! ❤️";
         
-        // ALL 22 PHOTOS VERIFIED
+        // ALL 22 FILES INTEGRATED
         const allPhotos = [
-            'crybaby.jpg', 'don.jpg', 'aaji.jpg', 'aaji-2.jpg', 'haircut-1.jpg', 'haircut-2.jpg', 
-            'haircut-3.jpg', 'traditional.jpg', 'traditional-2.jpg', 'menhdi.jpg', 'holi-2.jpg', 
-            'Holi-4.jpg', 'Holi-grp.jpg', 'trek.jpg', 'red-shirt.jpg', 'red-shirt-2.jpg', 
-            'kurta-1.jpg', 'wedding.jpg', 'wedding-entry.jpg', 'IMG-20260123-WA0038.jpg', 
-            'IMG-20260123-WA0039.jpg', 'IMG-20260123-WA0047.jpg'
+            'crybaby.jpg', 'don.jpg', 'aaji.jpg', 'haircut-1.jpg', 'haircut-2.jpg', 'traditional.jpg', 
+            'menhdi.jpg', 'trek.jpg', 'holi-2-1.jpg', 'Holi-4.jpg', 'Holi grp.jpg', 'kurta-1.jpg', 
+            'kurta-2.jpg', 'red shirt.jpg', 'red shirt-2.jpg', 'red shirt-3.jpg', 'red shirt-4.jpg', 
+            'wedding.jpg', 'IMG-20260123-WA0038(3).jpg', 'IMG-20260123-WA0039.jpg', 'IMG-20260123-WA0047.jpg', 
+            'IMG-20260124-WA0007(1).jpg', 'IMG-20260129-WA0025(1).jpg', 'IMG-20260129-WA0026(2).jpg', 
+            'IMG-20260129-WA0027(2).jpg', 'IMG_20260428_170955_132.jpg', 'IMG_20260430_161502_913.jpg'
         ];
 
         let isBirthdayTime = true; 
@@ -193,8 +165,8 @@
             setInterval(() => {
                 const h = document.createElement('div');
                 h.innerText = '❤️'; h.className = 'falling-heart';
-                const randomX = Math.floor(Math.random() * 95); 
-                h.style.left = randomX + 'vw';
+                h.style.color = '#D1B3FF'; // INLINE COLOR FIX
+                h.style.left = Math.floor(Math.random() * 95) + 'vw';
                 h.style.animationDuration = (Math.random() * 3 + 3) + 's';
                 document.getElementById('lockOverlay').appendChild(h);
                 setTimeout(() => h.remove(), 6000);
@@ -259,7 +231,6 @@
                 el.style.left = (Math.random() * 80) + 'vw';
                 el.style.animationDuration = (Math.random() * 3 + 5) + 's';
                 el.onclick = () => viewPhoto(img);
-                // ERROR SHIELD: Prevents broken images
                 el.innerHTML = `<img src="${img}" onerror="this.parentElement.remove()"><p class="pol-cap" style="font-size:0.6rem; color:#333">Pillu 💜</p>`;
                 document.body.appendChild(el);
                 setTimeout(() => el.remove(), 8000);
@@ -283,7 +254,9 @@
         }
 
         let mediaRecorder; let chunks = [];
-        document.getElementById('recordBtn').onclick = async () => {
+        const recordBtn = document.getElementById('recordBtn');
+
+        recordBtn.onclick = async () => {
             const musicIframe = document.getElementById('bgMusic');
             if(!mediaRecorder || mediaRecorder.state === 'inactive') {
                 try {
@@ -299,12 +272,10 @@
                         document.getElementById('playbackBox').classList.remove('hidden');
                         musicIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
                     };
-                    chunks = []; mediaRecorder.start(); document.getElementById('recordBtn').classList.add('recording');
-                    document.getElementById('recordStatus').innerText = "🔴 Recording...";
-                } catch (e) { alert("Mic blocked! Please allow access."); }
+                    chunks = []; mediaRecorder.start(); recordBtn.classList.add('recording');
+                } catch (e) { alert("Mic access denied!"); }
             } else {
-                mediaRecorder.stop(); document.getElementById('recordBtn').classList.remove('recording');
-                document.getElementById('recordStatus').innerText = "Saved! 💜";
+                mediaRecorder.stop(); recordBtn.classList.remove('recording');
             }
         };
 
