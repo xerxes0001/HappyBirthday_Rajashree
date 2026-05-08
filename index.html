@@ -15,67 +15,77 @@
             background: #080808; z-index: 9000; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center;
         }
-
-        /* LAVENDER FALLING HEARTS Logic */
         .falling-heart { 
-            position: fixed; top: -5vh; 
-            color: #D1B3FF; /* YOUR SHADE OF LAVENDER */
-            font-size: 24px; 
-            z-index: 8500; /* Behind the UI */
-            animation: fallHeart linear forwards; 
-            pointer-events: none;
-            user-select: none;
+            position: fixed; top: -5vh; color: #D1B3FF; font-size: 24px; 
+            z-index: 8500; animation: fallHeart linear forwards; pointer-events: none;
         }
-        @keyframes fallHeart { 
-            to { transform: translateY(115vh) rotate(360deg); } 
-        }
+        @keyframes fallHeart { to { transform: translateY(115vh) rotate(360deg); } }
 
-        .lock-input { z-index: 10000; position: relative; }
-        .lock-btn { z-index: 10000; position: relative; }
-        .timer-box { font-family: monospace; font-size: 2.5rem; color: #ff4d4d; margin-top: 20px; font-weight: bold; position: relative; z-index: 10000; }
-
-        /* 2. VINTAGE LETTER (CENTERED) */
+        /* 2. THE LETTER - PERFECTLY CENTERED */
         #startOverlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, #e2c08d 0%, #c19a6b 100%);
             z-index: 5500; flex-direction: column; align-items: center; justify-content: center;
             padding: 20px; box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
         }
-        #typewriterText { font-family: 'Georgia', serif; font-style: italic; font-size: 1.2rem; line-height: 1.7; color: #3d2b1f; text-align: center; max-width: 600px; }
+        #typewriterText {
+            font-family: 'Georgia', serif; font-style: italic; font-size: 1.15rem;
+            line-height: 1.7; color: #3d2b1f; text-align: center; max-width: 600px;
+        }
         .word { opacity: 0; display: inline-block; margin-right: 4px; transition: opacity 0.4s ease; }
         .word.visible { opacity: 1; }
 
         /* 3. MAIN SITE & TIMELINE */
-        .polaroid { background: #ffffff; padding: 10px 10px 35px 10px; border-radius: 2px; box-shadow: 0 10px 30px rgba(209, 179, 255, 0.3); width: 280px; margin: 25px auto; color: #333; }
+        .polaroid { 
+            background: #ffffff; padding: 10px 10px 35px 10px; border-radius: 2px; 
+            box-shadow: 0 10px 30px rgba(209, 179, 255, 0.3); width: 280px; 
+            margin: 25px auto; color: #333;
+        }
         .polaroid img, .polaroid video { width: 100%; height: auto; display: block; background: #000; }
         .pol-cap { text-align: center; font-style: italic; font-weight: bold; margin-top: 10px; font-size: 0.9rem;}
         .nickname-label { color: #D1B3FF; font-size: 2rem; font-weight: bold; margin-top: 50px; text-align: center; }
         .arrow-connector { color: #444; font-size: 40px; margin: 15px 0; text-align: center; }
 
-        /* 4. FINALE ELEMENTS */
-        #finalWishScreen, #feedbackScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; z-index: 9999; }
+        /* 4. PHOTO RAIN */
+        .falling-photo { 
+            position: fixed; top: -25vh; z-index: 8000; 
+            width: 135px; padding: 6px; background: #fff; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            animation: fallPhoto linear forwards; touch-action: none;
+        }
+        @keyframes fallPhoto { to { transform: translateY(125vh) rotate(360deg); } }
+
+        /* 5. FINALE SCREENS */
+        #finalWishScreen, #feedbackScreen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: none; flex-direction: column; align-items: center; 
+            justify-content: center; text-align: center; z-index: 9999;
+        }
         #finalWishScreen { background: #080808; }
         #feedbackScreen { background: #000; }
-        .heart-snow { position: fixed; font-size: 22px; z-index: 99; animation: floatUp linear infinite; pointer-events: none; color: #D1B3FF; }
-        @keyframes floatUp { from { transform: translateY(100vh); opacity: 1; } to { transform: translateY(-10vh); opacity: 0; } }
         
-        .falling-photo { position: fixed; top: -25vh; z-index: 8000; width: 135px; padding: 6px; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.8); animation: fallPhoto linear forwards; touch-action: none; }
-        @keyframes fallPhoto { to { transform: translateY(125vh) rotate(360deg); } }
-        
+        .timer-box { font-family: monospace; font-size: 2.5rem; color: #ff4d4d; margin-top: 20px; font-weight: bold; }
         #photoViewer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 11000; align-items: center; justify-content: center; }
         .blur-reveal { filter: blur(40px); transition: filter 2.5s ease-in-out; }
         .clear-now { filter: blur(0px) !important; }
-        .record-btn { background: #ff4d4d; width: 75px; height: 75px; border-radius: 50%; border: 4px solid #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .record-btn.recording { animation: pulse 1s infinite; background: #fff; }
+        
+        /* 6. MIC STYLING */
+        .record-btn { 
+            background: #ff4d4d; width: 85px; height: 85px; border-radius: 50%; 
+            border: 4px solid #fff; cursor: pointer; display: flex; 
+            align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .record-btn.recording { animation: pulse 1s infinite; background: #fff; color: #ff4d4d; }
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); } 70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(255, 77, 77, 0); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body onload="startLockHearts()">
 
     <div id="lockOverlay">
         <h2 class="text-2xl mb-8 text-purple-300 font-bold" style="position:relative; z-index:10000">Enter the Secret Code 🔐</h2>
-        <input type="text" id="passInput" class="lock-input bg-zinc-900 border-2 border-purple-400 p-4 rounded-xl mb-6 text-center text-xl w-64 outline-none text-white" placeholder="Password">
-        <button onclick="checkPass()" class="lock-btn bg-purple-600 text-white px-14 py-4 rounded-full font-bold active:scale-95 shadow-lg">Unlock Surprise</button>
-        <div class="timer-box" id="timer">00:00:00</div>
+        <input type="text" id="passInput" class="bg-zinc-900 border-2 border-purple-400 p-4 rounded-xl mb-6 text-center text-xl w-64 outline-none text-white" placeholder="Password" style="position:relative; z-index:10000">
+        <button onclick="checkPass()" class="bg-purple-600 text-white px-14 py-4 rounded-full font-bold active:scale-95 shadow-lg" style="position:relative; z-index:10000">Unlock Surprise</button>
+        <div class="timer-box" id="timer" style="position:relative; z-index:10000">00:00:00</div>
     </div>
 
     <div id="startOverlay">
@@ -93,7 +103,9 @@
             <div class="polaroid"><video id="v1" loop muted playsinline><source src="1778037251143.mp4"></video><p class="pol-cap">Gorgeous ❤️</p></div>
             <div class="polaroid"><video id="v2" loop muted playsinline><source src="VID-20260124-WA0003(1).mp4"></video><p class="pol-cap">Don 😎</p></div>
             <div class="polaroid"><video id="v3" loop muted playsinline><source src="doc_2026-05-06_13-28-43.mp4"></video><p class="pol-cap">Pillu 🍼</p></div>
+            
             <button onclick="unlockTimeline()" class="bg-purple-600 text-white px-12 py-4 rounded-full mt-14 font-bold shadow-xl">See Your Journey ↓</button>
+            
             <div id="timelineSection" class="hidden">
                 <div class="nickname-label">Pillu 🍼</div>
                 <div class="polaroid" onclick="viewPhoto('crybaby')"><img src="crybaby"></div>
@@ -101,8 +113,12 @@
                 <div class="nickname-label">With Aaji ❤️</div>
                 <div class="polaroid" onclick="viewPhoto('aaji')"><img src="aaji"></div>
                 <div class="arrow-connector">↓</div>
+                <div class="nickname-label">The Haircut Days 💇‍♀️</div>
+                <div class="polaroid" onclick="viewPhoto('haircut-1')"><img src="haircut-1"></div>
+                <div class="arrow-connector">↓</div>
                 <div class="nickname-label">Gorgeous ❤️</div>
                 <div class="polaroid" onclick="viewPhoto('wedding')"><img src="wedding"></div>
+                
                 <button onclick="startFinalSurprise()" class="mt-24 mb-40 bg-gradient-to-r from-purple-500 to-indigo-400 text-black px-14 py-6 rounded-full font-bold shadow-2xl">Final Surprise ✨</button>
             </div>
         </div>
@@ -112,28 +128,41 @@
     </div>
 
     <div id="finalWishScreen"><div id="finalWishText" class="font-serif italic p-6"></div></div>
+    
     <div id="feedbackScreen">
         <h2 class="text-3xl text-purple-300 mb-8 font-bold text-center">Any Thoughts? ❤️</h2>
-        <div id="recordBtn" class="record-btn mx-auto shadow-2xl"><span style="font-size:30px">🎙️</span></div>
-        <p id="recordStatus" class="mt-6 text-white text-lg text-center">Tap mic to record for Indraneel</p>
-        <div id="playbackBox" class="hidden mt-6"><audio id="voicePlayback" controls class="mx-auto"></audio></div>
+        <div id="recordBtn" class="record-btn mx-auto shadow-2xl"><span style="font-size:32px">🎙️</span></div>
+        <p id="recordStatus" class="mt-6 text-white text-lg text-center font-bold">Tap to Record for Indraneel</p>
+        <div id="playbackBox" class="hidden mt-6 flex flex-col items-center">
+            <audio id="voicePlayback" controls class="mb-4"></audio>
+            <a id="downloadVoice" class="text-purple-400 underline font-bold">Send to him via WhatsApp 🚀</a>
+        </div>
     </div>
 
     <div id="photoViewer" onclick="this.style.display='none'"><div class="polaroid" style="width: 95vw; margin: 0;"><img id="bigImg" src=""></div></div>
 
     <script>
-        const message = "I first saw you during our 10th grade, and since then, I have had a crush on you... [YOUR FULL MESSAGE]";
+        const message = "I first saw you during our 10th grade, and since then, I have had a crush on you. We had our verbal abuse competitions several times, and the second time, you were the clear winner. I was quite dumb, even when you tried to contact me through Telegram. I should have understood the obvious signs and the subtle hints you dropped—like keeping good profile pictures, which I did save, just in case I ever found the courage to propose. But I never did. You know, destiny works in beautiful ways. You were the one who proposed to me; you were the one who caught the hint I dropped: 'You are blunt... Tu tondavar bolte sagla.' Then you practiced for a month just to propose to me on the very first day of the year—01/01/2026. This was the best New Year present for me—starting the year with the very person I love. I know I messed up quite a lot, but you understood my dumb behavior and forgave me so many times. I have hurt you, but it was never intentional, and it never will be. All I ever want is for you to be happy. Happy Birthday, BonBon / Pillu (Rajashree). I love you so much, my darling.";
         const wishMsg = "I love you BonBon. Wishing you a very happy Birthday! ❤️";
-        const allPhotos = ['crybaby', 'aaji', 'wedding']; 
+        
+        // ALL 22 PHOTOS RESTORED
+        const allPhotos = [
+            'crybaby', 'don', 'aaji', 'haircut-1', 'haircut-2', 'traditional', 
+            'menhdi', 'trek', 'Holi-4', 'Holi grp', 'red shirt', 'kurta-1', 
+            'wedding', 'IMG-20260123-WA0038(3).jpg', 'IMG-20260123-WA0039.jpg', 
+            'IMG-20260123-WA0047.jpg', 'IMG-20260124-WA0007(1).jpg', 
+            'IMG-20260123-WA0038.jpg', 'haircut-3.jpg', 'holi-2.jpg', 
+            'traditional-2.jpg', 'wedding-entry.jpg'
+        ];
 
-        let isBirthdayTime = true; // TESTER: SET FALSE FOR MIDNIGHT
+        let isBirthdayTime = true; 
         const targetDate = new Date("May 9, 2026 00:00:00").getTime();
 
         function startLockHearts() {
             setInterval(() => {
                 const h = document.createElement('div');
                 h.innerHTML = '❤️'; h.className = 'falling-heart';
-                h.style.left = (Math.random() * 98) + 'vw'; 
+                h.style.left = (Math.random() * 95) + 'vw';
                 h.style.animationDuration = (Math.random() * 2 + 4) + 's';
                 document.getElementById('lockOverlay').appendChild(h);
                 setTimeout(() => h.remove(), 6000);
@@ -170,14 +199,6 @@
             document.getElementById('mainContent').classList.remove('hidden');
             window.scrollTo(0,0);
             document.getElementById('v1').play(); document.getElementById('v2').play(); document.getElementById('v3').play();
-            setInterval(() => {
-                const h = document.createElement('div');
-                h.innerHTML = '💜'; h.className = 'heart-snow';
-                h.style.left = Math.random() * 95 + 'vw';
-                h.style.animationDuration = (Math.random() * 2 + 4) + 's';
-                document.body.appendChild(h);
-                setTimeout(() => h.remove(), 5000);
-            }, 400);
         }
 
         function unlockTimeline() {
@@ -203,10 +224,10 @@
                 el.style.left = (Math.random() * 80) + 'vw';
                 el.style.animationDuration = (Math.random() * 2 + 5) + 's';
                 el.onclick = () => viewPhoto(img);
-                el.innerHTML = `<img src="${img}"><p class="pol-cap" style="font-size:0.6rem; color:#333">Gorgeous ❤️</p>`;
+                el.innerHTML = `<img src="${img}"><p class="pol-cap" style="font-size:0.6rem; color:#333">Pillu 💜</p>`;
                 document.body.appendChild(el);
                 setTimeout(() => el.remove(), 7000);
-            }, 750);
+            }, 600); // FASTER SPAWN
 
             setTimeout(() => {
                 clearInterval(snowInterval);
@@ -224,6 +245,39 @@
             document.getElementById('bigImg').src = img;
             document.getElementById('photoViewer').style.display = 'flex';
         }
+
+        /* ROBUST MIC LOGIC */
+        let mediaRecorder; let chunks = [];
+        const recordBtn = document.getElementById('recordBtn');
+        const statusText = document.getElementById('recordStatus');
+
+        recordBtn.onclick = async () => {
+            if(!mediaRecorder || mediaRecorder.state === 'inactive') {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({audio:true});
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.ondataavailable = e => chunks.push(e.data);
+                    mediaRecorder.onstop = () => {
+                        const blob = new Blob(chunks, {type:'audio/webm'});
+                        const url = URL.createObjectURL(blob);
+                        document.getElementById('voicePlayback').src = url;
+                        document.getElementById('downloadVoice').href = url;
+                        document.getElementById('downloadVoice').download = "Birthday_Message.webm";
+                        document.getElementById('playbackBox').classList.remove('hidden');
+                        statusText.innerText = "Saved! Tap to re-record.";
+                    };
+                    chunks = []; 
+                    mediaRecorder.start(); 
+                    recordBtn.classList.add('recording');
+                    statusText.innerText = "🔴 Recording... Tap again to stop.";
+                } catch (err) {
+                    alert("Please allow microphone access in your browser settings!");
+                }
+            } else {
+                mediaRecorder.stop();
+                recordBtn.classList.remove('recording');
+            }
+        };
 
         setInterval(() => {
             const now = new Date().getTime();
