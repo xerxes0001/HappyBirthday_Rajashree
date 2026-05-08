@@ -842,6 +842,8 @@ if(music){
 
 music.volume = 0.6;
 
+music.muted = false;
+
 const playPromise =
 music.play();
 
@@ -991,7 +993,12 @@ BonBon 💜
 </p>
 `;
 
-el.onclick = ()=>{
+el.onclick = (e)=>{
+
+
+e.stopPropagation();
+
+el.style.animationPlayState = 'paused';
 
 viewPhoto(img);
 };
@@ -1024,7 +1031,9 @@ setTimeout(()=>{
 
 viewer.style.opacity = '1';
 
-},50);
+},30);
+
+document.body.style.overflow = 'hidden';
 
 viewer.onclick = ()=>{
 
@@ -1033,6 +1042,8 @@ viewer.style.opacity = '0';
 setTimeout(()=>{
 
 viewer.style.display = 'none';
+
+document.body.style.overflow = 'auto';
 
 },300);
 };
