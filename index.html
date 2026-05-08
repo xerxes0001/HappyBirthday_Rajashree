@@ -256,16 +256,21 @@ rotate(360deg);
 display:none;
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.95);
+background:rgba(0,0,0,0.97);
 z-index:12000;
 justify-content:center;
 align-items:center;
+backdrop-filter:blur(10px);
+transition:0.3s;
 }
 
 #bigImg{
 max-width:95vw;
 max-height:95vh;
-border-radius:12px;
+border-radius:18px;
+box-shadow:
+0 0 45px rgba(205,180,246,0.35);
+object-fit:contain;
 }
 
 /* BLUR */
@@ -443,8 +448,8 @@ Open My Gift 🎁
 
 <!-- AUDIO -->
 
-<audio id="bgMusic" loop>
-<source src="background-music.mp3" type="audio/mp3">
+<audio id="bgMusic" loop preload="auto">
+<source src="background-music.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="revealAudio">
@@ -1003,20 +1008,35 @@ el.remove();
 }
 
 function viewPhoto(img){
-
 const viewer =
 document.getElementById('photoViewer');
 
-document.getElementById('bigImg')
-.src = img;
+const bigImg =
+document.getElementById('bigImg');
+
+bigImg.src = img;
 
 viewer.style.display = 'flex';
+
+viewer.style.opacity = '0';
+
+setTimeout(()=>{
+
+viewer.style.opacity = '1';
+
+},50);
+
+viewer.onclick = ()=>{
+
+viewer.style.opacity = '0';
 
 setTimeout(()=>{
 
 viewer.style.display = 'none';
 
-},3000);
+},300);
+};
+
 }
 
 function typeFinalWish(){
